@@ -31,14 +31,12 @@ plugins:
   - import
   - unicorn
   - prettier
+  - unused-imports
 
 rules:
   indent:
     - error
     - tab
-  linebreak-style:
-    - error
-    - unix
   quotes:
     - error
     - single
@@ -86,6 +84,14 @@ rules:
     - ignoreDeclarationSort: true
 
   no-unused-vars: "off"
+
+  unused-imports/no-unused-imports: error
+  unused-imports/no-unused-vars:
+    - warn
+    - vars: all
+      varsIgnorePattern: "^_"
+      args: after-used
+      argsIgnorePattern: "^_"
 
   unicorn/prevent-abbreviations: off
   unicorn/no-null: off
