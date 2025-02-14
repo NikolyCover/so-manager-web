@@ -8,7 +8,7 @@ export interface SidebarContainerProps extends StackProps {
 }
 
 export const SidebarContainer = styled(Stack)<SidebarContainerProps>(({ iscollapsed }) => ({
-	background: '#309a96',
+	background: '#404b47',
 	height: '100vh',
 	width: SIDEBAR_WIDTH,
 	...(iscollapsed && { width: SIDEBAR_COLLAPSED_WIDTH }),
@@ -27,21 +27,21 @@ export const StyledToggleButtonGroup = styled(ToggleButtonGroup)<ToggleButtonGro
 	display: 'flex',
 
 	'& svg': {
-		fill: '#13524f',
-		color: '#13524f',
+		fill: '#9fb3ab',
+		color: '#9fb3ab',
 	},
 
 	[`& .${toggleButtonClasses.root}`]: {
-		color: '#13524f',
+		color: '#9fb3ab',
 		fontWeight: 300,
 	},
 	'& .MuiButtonBase-root.Mui-selected': {
-		color: theme.palette.grey[900],
+		color: '#fff',
 		fontWeight: 500,
 
 		'& svg': {
-			fill: theme.palette.grey[900],
-			color: theme.palette.grey[900],
+			fill: '#fff',
+			color: '#fff',
 		},
 	},
 }))

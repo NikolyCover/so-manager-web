@@ -7,6 +7,7 @@ import { useAtom } from 'jotai'
 import { HeaderContainer } from './style'
 import Logo from '@/assets/logo.svg?react'
 import { isSidebarCollapsedAtom } from '@/atoms/sidebar'
+import { PRIMARY_COLOR } from '@/constants/color'
 import { theme } from '@/theme'
 
 export const Header = () => {
@@ -21,13 +22,13 @@ export const Header = () => {
 			<Stack direction="row" gap={2} alignItems="center">
 				<IconButton onClick={handleSidebarCollapse}>
 					{isSidebarCollapsed ? (
-						<ChevronRight color="#309a96" size={theme.spacing(3)} />
+						<ChevronRight color={PRIMARY_COLOR} size={theme.spacing(3)} />
 					) : (
-						<ChevronLeft color="#309a96" size={theme.spacing(3)} />
+						<ChevronLeft color={PRIMARY_COLOR} size={theme.spacing(3)} />
 					)}
 				</IconButton>
 
-				<Logo width={100} height={40} />
+				<Logo width={100} height={40} style={{ color: PRIMARY_COLOR }} />
 			</Stack>
 		</HeaderContainer>
 	)

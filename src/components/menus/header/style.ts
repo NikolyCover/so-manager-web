@@ -3,7 +3,7 @@ import { Stack, styled } from '@mui/material'
 import { HEADER_HEIGHT } from '@/constants/layout'
 
 export const HeaderContainer = styled(Stack)(({ theme }) => ({
-	background: theme.palette.grey[900],
+	background: '#2e3432',
 	height: HEADER_HEIGHT,
 	position: 'fixed',
 	width: '100%',

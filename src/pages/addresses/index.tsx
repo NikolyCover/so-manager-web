@@ -1,3 +1,4 @@
+import { AddressTable } from '@/components/address/table'
 import { ViewLayout } from '@/layouts/view'
 
 const AddressesPage = () => {
@@ -7,7 +8,9 @@ const AddressesPage = () => {
 				<ViewLayout.Header.Title>Endereços</ViewLayout.Header.Title>
 			</ViewLayout.Header.Root>
 
-			<ViewLayout.Content>conteudo</ViewLayout.Content>
+			<ViewLayout.Content>
+				<AddressTable />
+			</ViewLayout.Content>
 		</ViewLayout.Root>
 	)
 }
