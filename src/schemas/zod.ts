@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-const REQUIRED_MESSAGE_ID = 'form.required-field-error'
+const REQUIRED_MESSAGE_ID = 'Campo obrigatório'
 
 const customErrorMap: z.ZodErrorMap = (issue, ctx) => {
 	if (

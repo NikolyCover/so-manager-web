@@ -7,5 +7,5 @@ interface Props {
 }
 
 export const RegisterButton = ({ onClick }: Props) => {
-	return <Button label="form.register" onClick={onClick} startIcon={<Add />} />
+	return <Button label="Cadastrar" onClick={onClick} startIcon={<Add />} />
 }

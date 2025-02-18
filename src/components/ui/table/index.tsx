@@ -49,7 +49,7 @@ const Table = <T extends object>({
 
 	return (
 		<Stack gap={2}>
-			<TableControls endControls={endTableControls} isLoading={isLoading} />
+			<TableControls endControls={endTableControls} />
 
 			<TableContainer>
 				<MuiTable>

@@ -11,7 +11,7 @@ export const CleanFiltersButton = () => {
 	return (
 		<>
 			<Divider orientation="vertical" sx={{ marginX: 1 }} />
-			<Button size="small" variant="text" onClick={() => clearAll()} label="table.filtering.clean-filters" />
+			<Button size="small" variant="text" onClick={() => clearAll()} label="Limpar filtros" />
 		</>
 	)
 }

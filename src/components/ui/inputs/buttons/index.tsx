@@ -19,7 +19,7 @@ export const Buttons = ({ primary, secondary }: Props) => {
 		<Stack direction="row" gap={3} marginTop={3} justifyContent="right">
 			<Button
 				variant="text"
-				label={secondary.label ?? 'form.cancel'}
+				label={secondary.label ?? 'Cancelar'}
 				onClick={secondary.onClick}
 				fullWidth
 				type={secondary.type}
@@ -27,7 +27,7 @@ export const Buttons = ({ primary, secondary }: Props) => {
 			/>
 			<Button
 				variant="contained"
-				label={primary.label ?? 'form.confirm'}
+				label={primary.label ?? 'Confirmar'}
 				onClick={primary.onClick}
 				type={primary.type}
 				fullWidth

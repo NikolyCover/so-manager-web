@@ -20,8 +20,6 @@ export interface GetParams {
 export const useGetAll = <T extends ReturnType>({ endpoint, requestParams, enabled }: GetParams) => {
 	const service = new Service<T>(soAPI, endpoint)
 
-	console.log(import.meta.env.VITE_API_URL)
-
 	const queryFn = useCallback(async () => {
 		const data = await service.get({
 			paged: false,

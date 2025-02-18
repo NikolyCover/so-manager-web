@@ -8,37 +8,43 @@ import { useGetPageable } from '@/hooks/get'
 import { Address } from '@/schemas/address'
 
 export const AddressTable = () => {
-	const { data: addresses, totalElements, isLoading } = useGetPageable<Address>({ endpoint: ENDPOINTS.ADDRESS })
+	const {
+		data: addresses,
+		totalElements,
+		isLoading,
+	} = useGetPageable<Address>({ endpoint: ENDPOINTS.ADDRESS, enabled: true })
 
 	const columnHelper = createColumnHelper<Address>()
+
+	console.log(addresses)
 
 	const columns: ColumnDef<Address>[] = [
 		columnHelper.accessor('location.name', {
 			id: 'location.name',
 			header: 'Rua',
 			meta: {
-				filter: { type: 'text', id: 'location.name' },
+				filter: { type: 'text', id: 'locationName' },
 			},
 		}),
 		columnHelper.accessor('neighborhood.name', {
 			id: 'neighborhood.name',
 			header: 'Bairro',
 			meta: {
-				filter: { type: 'text', id: 'neighborhood.name' },
+				filter: { type: 'text', id: 'neighborhoodName' },
 			},
 		}),
 		columnHelper.accessor('city.name', {
 			id: 'city.name',
 			header: 'Cidade',
 			meta: {
-				filter: { type: 'text', id: 'city.name' },
+				filter: { type: 'text', id: 'cityName' },
 			},
 		}),
 		columnHelper.accessor('city.federalUnit.name', {
 			id: 'city.federalUnit.name',
 			header: 'Estado',
 			meta: {
-				filter: { type: 'text', id: 'city.federalUnit.name' },
+				filter: { type: 'text', id: 'federalUnitName' },
 			},
 		}),
 		columnHelper.accessor('zipCode', {

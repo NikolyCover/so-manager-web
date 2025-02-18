@@ -15,34 +15,45 @@ export const citySchema = z.object({
 
 export type City = z.output<typeof citySchema>
 
-export const LocationTypeSchema = z.object({
+export const locationTypeSchema = z.object({
 	id: z.number().int().positive(),
 	name: z.string(),
 })
 
-export type LocationType = z.output<typeof LocationTypeSchema>
+export type LocationType = z.output<typeof locationTypeSchema>
 
-export const LocationSchema = z.object({
+export const locationSchema = z.object({
 	id: z.number().int().positive(),
 	name: z.string(),
-	locationType: LocationTypeSchema,
+	locationType: locationTypeSchema,
 })
 
-export type Location = z.output<typeof LocationSchema>
+export type Location = z.output<typeof locationSchema>
 
-export const NeighborhoodSchema = z.object({
+export const neighborhoodSchema = z.object({
 	id: z.number().int().positive(),
 	name: z.string(),
 })
 
-export type Neighborhood = z.output<typeof NeighborhoodSchema>
+export type Neighborhood = z.output<typeof neighborhoodSchema>
 
-export const AddressSchema = z.object({
+export const addressSchema = z.object({
 	id: z.number().int().positive(),
 	zipCode: z.string(),
-	neighborhood: NeighborhoodSchema,
-	location: LocationSchema,
+	neighborhood: neighborhoodSchema,
+	location: locationSchema,
 	city: citySchema,
 })
 
-export type Address = z.output<typeof AddressSchema>
+// export const addressFormSchema = addressSchema.omit({ id: true })
+
+export const addressFormSchema = z.object({
+	zipCode: z.string(),
+	neighborhoodId: z.number(),
+	locationId: z.number(),
+	cityId: z.number(),
+})
+
+export type AddressForm = z.output<typeof addressFormSchema>
+
+export type Address = z.output<typeof addressSchema>

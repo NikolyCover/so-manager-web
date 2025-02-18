@@ -30,15 +30,15 @@ const FilteringButton = ({ filter }: FilteringButtonProps) => {
 			<IconButton
 				size="small"
 				onClick={(e) => openPopover(filteringPopover as RefObject<PopoverOptions>)(e.currentTarget)}
-				tooltip="table.filtering.filter"
+				tooltip="Filtros"
 			>
 				<FilterIcon color={getIsFilteredBy(filter.id) ? PRIMARY_COLOR : undefined} />
 			</IconButton>
 
-			<Popover ref={filteringPopover} title="table.filtering.filters">
+			<Popover ref={filteringPopover} title="Filtros">
 				{filter && <TextFilter filter={filter} />}
 				<Stack direction="row" gap={1} marginTop={theme.spacing(2)}>
-					<Button variant="text" fullWidth onClick={handleCleanFilters} label="table.filtering.clean" />
+					<Button variant="text" fullWidth onClick={handleCleanFilters} label="Limpar" />
 				</Stack>
 			</Popover>
 		</>
