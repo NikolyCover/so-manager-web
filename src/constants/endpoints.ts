@@ -4,4 +4,5 @@ export const ENDPOINTS = {
 	CITY: 'city',
 	LOCATION: 'location',
 	NEIGHBORHOOD: 'neighborhood',
+	FEDERAL_UNIT: 'federal-unit',
 }

@@ -16,8 +16,6 @@ export const AddressTable = () => {
 
 	const columnHelper = createColumnHelper<Address>()
 
-	console.log(addresses)
-
 	const columns: ColumnDef<Address>[] = [
 		columnHelper.accessor('location.name', {
 			id: 'location.name',

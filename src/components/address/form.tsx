@@ -1,10 +1,11 @@
 /* eslint-disable indent */
-import { RefObject, useCallback } from 'react'
+import { RefObject, useCallback, useState } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Stack } from '@mui/material'
 import { FormProvider, useForm } from 'react-hook-form'
 
+import Select from '../ui/inputs/select'
 import ControlledSelect from '../ui/inputs/select/controlled'
 import ControlledTextField from '../ui/inputs/text-field'
 import { ModalOptions, closeModal } from '@/components/ui/modal'
@@ -12,7 +13,14 @@ import ModalForm from '@/components/ui/modal-form'
 import { ENDPOINTS } from '@/constants/endpoints'
 import { useGetAll } from '@/hooks/get'
 import { useMutate } from '@/hooks/mutate'
-import { AddressForm as AddressFormType, City, Location, Neighborhood, addressFormSchema } from '@/schemas/address'
+import {
+	AddressForm as AddressFormType,
+	City,
+	FederalUnit,
+	Location,
+	Neighborhood,
+	addressFormSchema,
+} from '@/schemas/address'
 import { theme } from '@/theme'
 import { getSchemaDefaults } from '@/utils/get-schema-defaults'
 
@@ -21,13 +29,20 @@ interface Props {
 }
 
 const AddressForm = ({ modalRef }: Props) => {
+	const [federalUnitAbbreviation, setFederalUnitAbbreviation] = useState('')
+
 	const { create } = useMutate({
 		endpoint: ENDPOINTS.ADDRESS,
 	})
 
 	const { data: locations } = useGetAll<Location>({ endpoint: ENDPOINTS.LOCATION })
 	const { data: neighborhoods } = useGetAll<Neighborhood>({ endpoint: ENDPOINTS.NEIGHBORHOOD })
-	const { data: cities } = useGetAll<City>({ endpoint: ENDPOINTS.CITY })
+	const { data: federalUnits } = useGetAll<FederalUnit>({ endpoint: ENDPOINTS.FEDERAL_UNIT })
+	const { data: cities } = useGetAll<City>({
+		endpoint: ENDPOINTS.CITY,
+		requestParams: { federalUnitAbbreviation },
+		enabled: federalUnitAbbreviation != '',
+	})
 
 	const form = useForm<AddressFormType>({
 		resolver: zodResolver(addressFormSchema),
@@ -58,7 +73,7 @@ const AddressForm = ({ modalRef }: Props) => {
 					<ControlledSelect
 						control={form.control}
 						name="locationId"
-						label="Rua"
+						label="Logradouro"
 						items={locations.map((location) => ({
 							label: location.name,
 							value: location.id,
@@ -73,6 +88,16 @@ const AddressForm = ({ modalRef }: Props) => {
 							label: neighborhood.name,
 							value: neighborhood.id,
 						}))}
+					/>
+
+					<Select
+						label="Estado"
+						items={federalUnits.map((federalUnit) => ({
+							label: federalUnit.name,
+							value: federalUnit.abbreviation,
+						}))}
+						value={federalUnitAbbreviation}
+						onChange={(e) => setFederalUnitAbbreviation(e.target.value as string)}
 					/>
 
 					<ControlledSelect

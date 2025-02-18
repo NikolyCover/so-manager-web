@@ -45,8 +45,6 @@ export const addressSchema = z.object({
 	city: citySchema,
 })
 
-// export const addressFormSchema = addressSchema.omit({ id: true })
-
 export const addressFormSchema = z.object({
 	zipCode: z.string(),
 	neighborhoodId: z.number(),
