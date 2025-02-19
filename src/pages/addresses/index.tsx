@@ -1,5 +1,6 @@
 import { OverviewSection } from './overview'
 import { SearchByZipCodeSection } from './search-by-zip-code'
+import { SearchCitySection } from './search-city'
 import AddressForm from '@/components/address/form'
 import { RegisterButton } from '@/components/ui/inputs/button/register'
 import { openModal, useModal } from '@/components/ui/modal'
@@ -7,7 +8,7 @@ import { useSectionNavigation } from '@/hooks/section-navigation'
 import { ViewLayout } from '@/layouts/view'
 import { LabelValue } from '@/types/label-value'
 
-type SectionName = 'overview' | 'search-by-zip-code'
+type SectionName = 'overview' | 'search-by-zip-code' | 'search-city'
 
 const AddressesPage = () => {
 	const modalRef = useModal()
@@ -20,6 +21,10 @@ const AddressesPage = () => {
 		{
 			label: 'Busca por CEP',
 			value: 'search-by-zip-code',
+		},
+		{
+			label: 'Busca cidade',
+			value: 'search-city',
 		},
 	]
 
@@ -39,6 +44,7 @@ const AddressesPage = () => {
 			<ViewLayout.Content>
 				{section == 'overview' && <OverviewSection />}
 				{section == 'search-by-zip-code' && <SearchByZipCodeSection />}
+				{section == 'search-city' && <SearchCitySection />}
 
 				<AddressForm modalRef={modalRef} />
 			</ViewLayout.Content>

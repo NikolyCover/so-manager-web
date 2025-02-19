@@ -16,7 +16,7 @@ export const useGetBy = <T extends object>({ endpoint, id, enabled }: ParamsGetB
 	const service = new Service<T>(soAPI, endpoint)
 
 	const { data, error, isLoading } = useQuery({
-		queryKey: [endpoint, Number(id)],
+		queryKey: [endpoint, id],
 		queryFn: async () => await service.getBy(id),
 		enabled: id ? enabled : false,
 	})
