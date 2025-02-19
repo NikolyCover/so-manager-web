@@ -1,5 +1,6 @@
 export const ENDPOINTS = {
 	ADDRESS: 'address',
+	EXTERNAL: 'external',
 	CLIENT: 'client',
 	CITY: 'city',
 	LOCATION: 'location',

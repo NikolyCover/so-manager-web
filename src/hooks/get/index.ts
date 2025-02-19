@@ -22,7 +22,7 @@ export const useGetAll = <T extends ReturnType>({ endpoint, requestParams, enabl
 
 	const queryFn = useCallback(async () => {
 		const data = await service.get({
-			paged: false,
+			size: 2_147_483_647,
 			...requestParams,
 		})
 
@@ -56,7 +56,6 @@ export const useGetPageable = <T extends ReturnType>({ endpoint, requestParams, 
 	return useGetAll<T>({
 		endpoint,
 		requestParams: {
-			paged: true,
 			page,
 			size: rowsPerPage,
 			...(sort && { sort }),

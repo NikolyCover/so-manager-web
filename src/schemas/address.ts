@@ -46,7 +46,11 @@ export const addressSchema = z.object({
 })
 
 export const addressFormSchema = z.object({
-	zipCode: z.string(),
+	zipCode: z
+		.string()
+		.min(8, 'CEP deve ter no mínimo 8 caracteres')
+		.max(9, 'CEP deve ter no máximo 9 caracteres')
+		.regex(/^\d{5}\d{3}$/, 'CEP inválido. Formato esperado: 00000000'),
 	neighborhoodId: z.number(),
 	locationId: z.number(),
 	cityId: z.number(),

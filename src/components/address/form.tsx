@@ -66,7 +66,13 @@ const AddressForm = ({ modalRef }: Props) => {
 
 	return (
 		<FormProvider {...form}>
-			<ModalForm modalRef={modalRef} onSubmit={onSubmit} title="Cadastrar Endereço" width={theme.spacing(100)}>
+			<ModalForm
+				modalRef={modalRef}
+				onSubmit={onSubmit}
+				title="Cadastrar Endereço"
+				width={theme.spacing(100)}
+				onClose={() => setFederalUnitAbbreviation('')}
+			>
 				<Stack gap={2}>
 					<ControlledTextField control={form.control} name="zipCode" label="CEP" />
 
@@ -91,7 +97,7 @@ const AddressForm = ({ modalRef }: Props) => {
 					/>
 
 					<Select
-						label="Estado"
+						label="Unidade Federativa"
 						items={federalUnits.map((federalUnit) => ({
 							label: federalUnit.name,
 							value: federalUnit.abbreviation,

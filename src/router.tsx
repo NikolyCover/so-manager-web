@@ -7,6 +7,7 @@ import ErrorFallback from './pages/error/fallback'
 import ErrorNotFound from './pages/error/not-found'
 
 const AddressesPage = lazy(() => import('@/pages/addresses'))
+const AddressPage = lazy(() => import('@/pages/address'))
 const ClientsPage = lazy(() => import('@/pages/clients'))
 
 export const router = createBrowserRouter([
@@ -37,6 +38,10 @@ export const router = createBrowserRouter([
 							{
 								index: true,
 								element: <AddressesPage />,
+							},
+							{
+								path: ':addressId',
+								element: <AddressPage />,
 							},
 						],
 					},
