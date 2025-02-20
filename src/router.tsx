@@ -9,6 +9,7 @@ import ErrorNotFound from './pages/error/not-found'
 const AddressesPage = lazy(() => import('@/pages/addresses'))
 const AddressPage = lazy(() => import('@/pages/address'))
 const ClientsPage = lazy(() => import('@/pages/clients'))
+const ClientPage = lazy(() => import('@/pages/client'))
 
 export const router = createBrowserRouter([
 	{
@@ -21,7 +22,7 @@ export const router = createBrowserRouter([
 				children: [
 					{
 						index: true,
-						element: <Navigate to="addresses" />,
+						element: <Navigate to="clients" />,
 					},
 					{
 						path: 'clients',
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
 							{
 								index: true,
 								element: <ClientsPage />,
+							},
+							{
+								path: ':clientId',
+								element: <ClientPage />,
 							},
 						],
 					},

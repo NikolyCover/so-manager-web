@@ -6,15 +6,17 @@ import { InfoWarning } from '@/components/ui/feedback/warning/info'
 import { Field } from '@/components/ui/field'
 import { ENDPOINTS } from '@/constants/endpoints'
 import { useGetBy } from '@/hooks/get/get-by'
-import { City } from '@/schemas/address'
+import { Cidade } from '@/schemas/endereco'
+import { addressAPI } from '@/service/address'
 
 export const SearchCitySection = () => {
 	const [cityName, setCityName] = useState('')
 
-	const { data: city } = useGetBy<City>({
+	const { data: city } = useGetBy<Cidade>({
 		endpoint: `${ENDPOINTS.CITY}/${ENDPOINTS.NAME}`,
 		id: cityName,
 		enabled: cityName != '',
+		api: addressAPI,
 	})
 
 	return (
@@ -33,9 +35,9 @@ export const SearchCitySection = () => {
 				<Stack direction="row" gap={20}>
 					<Field label="Id">{city.id}</Field>
 
-					<Field label="Nome">{city.name}</Field>
+					<Field label="Nome">{city.nome}</Field>
 
-					<Field label="Unidade Federativa">{`${city.federalUnit.name} (${city.federalUnit.abbreviation})`}</Field>
+					<Field label="Unidade Federativa">{`${city.unidadeFederativa.nome} (${city.unidadeFederativa.sigla})`}</Field>
 				</Stack>
 			)}
 

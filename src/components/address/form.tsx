@@ -14,13 +14,14 @@ import { ENDPOINTS } from '@/constants/endpoints'
 import { useGetAll } from '@/hooks/get'
 import { useMutate } from '@/hooks/mutate'
 import {
-	AddressForm as AddressFormType,
-	City,
-	FederalUnit,
-	Location,
-	Neighborhood,
-	addressFormSchema,
-} from '@/schemas/address'
+	EnderecoForm as AddressFormType,
+	Bairro,
+	Cidade,
+	Logradouro,
+	UnidadeFederativa,
+	enderecoFormSchema,
+} from '@/schemas/endereco'
+import { addressAPI } from '@/service/address'
 import { theme } from '@/theme'
 import { getSchemaDefaults } from '@/utils/get-schema-defaults'
 
@@ -33,20 +34,22 @@ const AddressForm = ({ modalRef }: Props) => {
 
 	const { create } = useMutate({
 		endpoint: ENDPOINTS.ADDRESS,
+		api: addressAPI,
 	})
 
-	const { data: locations } = useGetAll<Location>({ endpoint: ENDPOINTS.LOCATION })
-	const { data: neighborhoods } = useGetAll<Neighborhood>({ endpoint: ENDPOINTS.NEIGHBORHOOD })
-	const { data: federalUnits } = useGetAll<FederalUnit>({ endpoint: ENDPOINTS.FEDERAL_UNIT })
-	const { data: cities } = useGetAll<City>({
+	const { data: locations } = useGetAll<Logradouro>({ endpoint: ENDPOINTS.LOCATION, api: addressAPI })
+	const { data: neighborhoods } = useGetAll<Bairro>({ endpoint: ENDPOINTS.NEIGHBORHOOD, api: addressAPI })
+	const { data: federalUnits } = useGetAll<UnidadeFederativa>({ endpoint: ENDPOINTS.FEDERAL_UNIT, api: addressAPI })
+	const { data: cities } = useGetAll<Cidade>({
 		endpoint: ENDPOINTS.CITY,
 		requestParams: { federalUnitAbbreviation },
 		enabled: federalUnitAbbreviation != '',
+		api: addressAPI,
 	})
 
 	const form = useForm<AddressFormType>({
-		resolver: zodResolver(addressFormSchema),
-		values: getSchemaDefaults(addressFormSchema),
+		resolver: zodResolver(enderecoFormSchema),
+		values: getSchemaDefaults(enderecoFormSchema),
 	})
 
 	const { reset } = form
@@ -74,24 +77,24 @@ const AddressForm = ({ modalRef }: Props) => {
 				onClose={() => setFederalUnitAbbreviation('')}
 			>
 				<Stack gap={2}>
-					<ControlledTextField control={form.control} name="zipCode" label="CEP" />
+					<ControlledTextField control={form.control} name="cep" label="CEP" />
 
 					<ControlledSelect
 						control={form.control}
-						name="locationId"
+						name="idLogradouro"
 						label="Logradouro"
 						items={locations.map((location) => ({
-							label: location.name,
+							label: location.nome,
 							value: location.id,
 						}))}
 					/>
 
 					<ControlledSelect
 						control={form.control}
-						name="neighborhoodId"
+						name="idBairro"
 						label="Bairro"
 						items={neighborhoods.map((neighborhood) => ({
-							label: neighborhood.name,
+							label: neighborhood.nome,
 							value: neighborhood.id,
 						}))}
 					/>
@@ -99,8 +102,8 @@ const AddressForm = ({ modalRef }: Props) => {
 					<Select
 						label="Unidade Federativa"
 						items={federalUnits.map((federalUnit) => ({
-							label: federalUnit.name,
-							value: federalUnit.abbreviation,
+							label: federalUnit.nome,
+							value: federalUnit.sigla,
 						}))}
 						value={federalUnitAbbreviation}
 						onChange={(e) => setFederalUnitAbbreviation(e.target.value as string)}
@@ -108,10 +111,10 @@ const AddressForm = ({ modalRef }: Props) => {
 
 					<ControlledSelect
 						control={form.control}
-						name="cityId"
+						name="idCidade"
 						label="Cidade"
 						items={cities.map((city) => ({
-							label: city.name,
+							label: city.nome,
 							value: city.id,
 						}))}
 					/>

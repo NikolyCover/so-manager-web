@@ -5,12 +5,17 @@ import { Field } from '@/components/ui/field'
 import { ENDPOINTS } from '@/constants/endpoints'
 import { useGetBy } from '@/hooks/get/get-by'
 import { ViewLayout } from '@/layouts/view'
-import { Address } from '@/schemas/address'
+import { Endereco } from '@/schemas/endereco'
+import { addressAPI } from '@/service/address'
 
 const AddressPage = () => {
 	const { addressId } = useParams()
 
-	const { data: address, isLoading } = useGetBy<Address>({ endpoint: ENDPOINTS.ADDRESS, id: addressId ?? '' })
+	const { data: address, isLoading } = useGetBy<Endereco>({
+		endpoint: ENDPOINTS.ADDRESS,
+		id: addressId ?? '',
+		api: addressAPI,
+	})
 
 	if (isLoading) return <FullHeightLoading />
 
@@ -23,15 +28,15 @@ const AddressPage = () => {
 			</ViewLayout.Header.Root>
 
 			<ViewLayout.Content>
-				<Field label="CEP">{address.zipCode}</Field>
+				<Field label="CEP">{address.cep}</Field>
 
-				<Field label="Logradouro">{`${address.location.locationType.name} ${address.location.name}`}</Field>
+				<Field label="Logradouro">{`${address.logradouro.locationType.nome} ${address.logradouro.nome}`}</Field>
 
-				<Field label="Bairro">{address.neighborhood.name}</Field>
+				<Field label="Bairro">{address.bairro.nome}</Field>
 
-				<Field label="Cidade">{address.city.name}</Field>
+				<Field label="Cidade">{address.cidade.nome}</Field>
 
-				<Field label="Unidade Federativa">{`${address.city.federalUnit.name} (${address.city.federalUnit.abbreviation})`}</Field>
+				<Field label="Unidade Federativa">{`${address.cidade.unidadeFederativa.nome} (${address.cidade.unidadeFederativa.sigla})`}</Field>
 			</ViewLayout.Content>
 		</ViewLayout.Root>
 	)

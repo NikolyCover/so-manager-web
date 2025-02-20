@@ -6,7 +6,8 @@ import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 import Table from '@/components/ui/table'
 import { ENDPOINTS } from '@/constants/endpoints'
 import { useGetPageable } from '@/hooks/get'
-import { Address } from '@/schemas/address'
+import { Endereco } from '@/schemas/endereco'
+import { addressAPI } from '@/service/address'
 
 interface Props {
 	enableFilters?: boolean
@@ -20,17 +21,18 @@ export const AddressTable = ({ requestParams, enableFilters = true, external = f
 		data: addresses,
 		totalElements,
 		isLoading,
-	} = useGetPageable<Address>({
+	} = useGetPageable<Endereco>({
 		endpoint: external ? `${ENDPOINTS.ADDRESS}/${ENDPOINTS.EXTERNAL}` : ENDPOINTS.ADDRESS,
 		enabled,
 		requestParams,
+		api: addressAPI,
 	})
 
-	const columnHelper = createColumnHelper<Address>()
+	const columnHelper = createColumnHelper<Endereco>()
 
-	const columns: ColumnDef<Address>[] = [
-		columnHelper.accessor('zipCode', {
-			id: 'zipCode',
+	const columns: ColumnDef<Endereco>[] = [
+		columnHelper.accessor('cep', {
+			id: 'cep',
 			header: 'CEP',
 			meta: enableFilters
 				? {
@@ -38,45 +40,45 @@ export const AddressTable = ({ requestParams, enableFilters = true, external = f
 				}
 				: undefined,
 		}),
-		columnHelper.accessor('location.name', {
-			id: 'location.name',
+		columnHelper.accessor('logradouro.nome', {
+			id: 'logradouro.nome',
 			header: 'Logradouro',
 			meta: enableFilters
 				? {
-					filter: { type: 'text', id: 'locationName' },
+					filter: { type: 'text', id: 'nomeLogradouro' },
 				}
 				: undefined,
 		}),
-		columnHelper.accessor('neighborhood.name', {
-			id: 'neighborhood.name',
+		columnHelper.accessor('bairro.nome', {
+			id: 'bairro.nome',
 			header: 'Bairro',
 			meta: enableFilters
 				? {
-					filter: { type: 'text', id: 'neighborhoodName' },
+					filter: { type: 'text', id: 'nomeBairro' },
 				}
 				: undefined,
 		}),
-		columnHelper.accessor('city.name', {
-			id: 'city.name',
+		columnHelper.accessor('cidade.nome', {
+			id: 'cidade.nome',
 			header: 'Cidade',
 			meta: enableFilters
 				? {
-					filter: { type: 'text', id: 'cityName' },
+					filter: { type: 'text', id: 'nomeCidade' },
 				}
 				: undefined,
 		}),
-		columnHelper.accessor('city.federalUnit.name', {
-			id: 'city.federalUnit.name',
+		columnHelper.accessor('cidade.unidadeFederativa.nome', {
+			id: 'cidade.unidadeFederativa.nome',
 			header: 'Unidade Federativa',
 			meta: enableFilters
 				? {
-					filter: { type: 'text', id: 'federalUnitName' },
+					filter: { type: 'text', id: 'nomeUnidadeFederativa' },
 				}
 				: undefined,
 		}),
-	] as ColumnDef<Address>[]
+	] as ColumnDef<Endereco>[]
 
-	const getRowLink = useCallback((address: Address) => `${address.id}`, [])
+	const getRowLink = useCallback((address: Endereco) => `${address.id}`, [])
 
 	return (
 		<Table

@@ -1,17 +1,17 @@
 import { useCallback, useMemo } from 'react'
 
 import { MutationFunction, QueryKey, useMutation, useQueryClient } from '@tanstack/react-query'
-import { AxiosError, AxiosResponse } from 'axios'
+import { AxiosError, AxiosInstance, AxiosResponse } from 'axios'
 import { toast } from 'react-toastify'
 
 import { useLoading } from './loading'
 import { Service } from '@/service'
-import { soAPI } from '@/service/saad'
 import { ErrorResponse } from '@/types/error-response'
 
 interface Params {
 	endpoint: string
 	invalidateQueries?: QueryKey[]
+	api: AxiosInstance
 }
 
 interface BaseMethodParams {
@@ -34,8 +34,9 @@ interface DeleteMethodParams extends BaseMethodParams {
 export const useMutate = <T extends object, P extends object = object>({
 	endpoint,
 	invalidateQueries = [],
+	api,
 }: Params) => {
-	const service = new Service<T>(soAPI, endpoint)
+	const service = new Service<T>(api, endpoint)
 	const queryClient = useQueryClient()
 	const { startLoading, stopLoading } = useLoading()
 
