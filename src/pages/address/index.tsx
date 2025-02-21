@@ -30,7 +30,7 @@ const AddressPage = () => {
 			<ViewLayout.Content>
 				<Field label="CEP">{address.cep}</Field>
 
-				<Field label="Logradouro">{`${address.logradouro.locationType.nome} ${address.logradouro.nome}`}</Field>
+				<Field label="Logradouro">{`${address.logradouro.tipoLogradouro.nome} ${address.logradouro.nome}`}</Field>
 
 				<Field label="Bairro">{address.bairro.nome}</Field>
 

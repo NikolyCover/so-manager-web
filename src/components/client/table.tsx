@@ -34,27 +34,33 @@ export const ClientTable = ({ requestParams, enabled = true }: Props) => {
 		columnHelper.accessor('nome', {
 			id: 'nome',
 			header: 'nome',
+			enableSorting: false,
 		}),
 		columnHelper.accessor('nomeSocial', {
 			id: 'nomeSocial',
 			header: 'Nome social',
+			enableSorting: false,
 		}),
 		columnHelper.accessor('cpf', {
 			id: 'cpf',
 			header: 'CPF',
 			cell: (col) => formatCPF(col.cell.getValue()),
+			enableSorting: false,
 		}),
 		columnHelper.accessor('enderecoEspecifico.endereco.cidade.nome', {
 			id: 'enderecoEspecifico.endereco.cidade.nome',
 			header: 'Cidade',
+			enableSorting: false,
 		}),
 		columnHelper.accessor('enderecoEspecifico.endereco.cidade.unidadeFederativa.sigla', {
 			id: 'enderecoEspecifico.endereco.cidade.unidadeFederativa.sigla',
 			header: 'Unidade Federativa',
+			enableSorting: false,
 		}),
 		columnHelper.accessor('enderecoEspecifico.endereco.bairro.nome', {
 			id: 'enderecoEspecifico.endereco.bairro.nome',
 			header: 'Bairro',
+			enableSorting: false,
 		}),
 	] as ColumnDef<Cliente>[]
 

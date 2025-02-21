@@ -25,7 +25,7 @@ export type TipoLogradouro = z.output<typeof tipoLogradouroSchema>
 export const logradouroSchema = z.object({
 	id: z.number().int().positive(),
 	nome: z.string(),
-	locationType: tipoLogradouroSchema,
+	tipoLogradouro: tipoLogradouroSchema,
 })
 
 export type Logradouro = z.output<typeof logradouroSchema>

@@ -21,7 +21,7 @@ export const AddressClientFormFields = () => {
 				name="idEndereco"
 				label="Endereço"
 				items={addresses.map((add) => ({
-					label: `${add.logradouro.locationType.nome} ${add.logradouro.nome} - Bairro ${add.bairro.nome}, ${add.cidade.nome} - ${add.cidade.unidadeFederativa.sigla}, ${formatCEP(add.cep)}`,
+					label: `${add.logradouro.tipoLogradouro.nome} ${add.logradouro.nome} - Bairro ${add.bairro.nome}, ${add.cidade.nome} - ${add.cidade.unidadeFederativa.sigla}, ${formatCEP(add.cep)}`,
 					value: add.id,
 				}))}
 			/>

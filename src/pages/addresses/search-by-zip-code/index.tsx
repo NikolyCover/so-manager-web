@@ -27,7 +27,7 @@ export const SearchByZipCodeSection = () => {
 
 			<AddressTable
 				enableFilters={false}
-				requestParams={{ zipCode }}
+				requestParams={{ cep: zipCode }}
 				external={external}
 				enabled={isValidZipCode(zipCode)}
 			/>

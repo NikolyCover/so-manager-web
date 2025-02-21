@@ -8,6 +8,7 @@ import { ENDPOINTS } from '@/constants/endpoints'
 import { useGetPageable } from '@/hooks/get'
 import { Endereco } from '@/schemas/endereco'
 import { addressAPI } from '@/service/address'
+import { formatCEP } from '@/utils/format-cep'
 
 interface Props {
 	enableFilters?: boolean
@@ -36,9 +37,10 @@ export const AddressTable = ({ requestParams, enableFilters = true, external = f
 			header: 'CEP',
 			meta: enableFilters
 				? {
-					filter: { type: 'text', id: 'zipCode' },
+					filter: { type: 'text', id: 'cep' },
 				}
 				: undefined,
+			cell: (cel) => formatCEP(cel.getValue()),
 		}),
 		columnHelper.accessor('logradouro.nome', {
 			id: 'logradouro.nome',

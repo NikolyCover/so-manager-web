@@ -42,7 +42,7 @@ const CLientPage = () => {
 				<Typography variant="h2">Endereço</Typography>
 
 				<Stack direction="row" justifyContent="space-between" flexWrap="wrap">
-					<Field label="Logradouro">{`${client.enderecoEspecifico?.endereco.logradouro.locationType.nome} ${client.enderecoEspecifico?.endereco.logradouro.nome}`}</Field>
+					<Field label="Logradouro">{`${client.enderecoEspecifico?.endereco.logradouro.tipoLogradouro.nome} ${client.enderecoEspecifico?.endereco.logradouro.nome}`}</Field>
 
 					<Field label="Número">{client.enderecoEspecifico?.numeroEndereco}</Field>
 
