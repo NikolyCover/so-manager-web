@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { FormControlLabel, Stack, Switch, TextField } from '@mui/material'
 
-import { AddressTable } from '@/components/address/table'
+import { AddressTable } from '@/components/endereco/table'
 import { isValidZipCode } from '@/utils/is-valid-zip-code'
 
 export const SearchByZipCodeSection = () => {

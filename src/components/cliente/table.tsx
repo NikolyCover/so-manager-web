@@ -17,7 +17,7 @@ interface Props {
 
 export const ClientTable = ({ requestParams, enabled = true }: Props) => {
 	const {
-		data: clients,
+		data: clientes,
 		totalElements,
 		isLoading,
 	} = useGetAll<Cliente>({
@@ -62,12 +62,12 @@ export const ClientTable = ({ requestParams, enabled = true }: Props) => {
 		}),
 	] as ColumnDef<Cliente>[]
 
-	const getRowLink = useCallback((client: Cliente) => `${client.id}`, [])
+	const getRowLink = useCallback((cliente: Cliente) => `${cliente.id}`, [])
 
 	return (
 		<Table
 			columns={columns}
-			data={clients}
+			data={clientes}
 			dataLength={totalElements}
 			getRowLink={getRowLink}
 			isLoading={isLoading}

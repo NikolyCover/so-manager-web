@@ -29,11 +29,11 @@ export const Sidebar = () => {
 				value={pathname.split('/')[1]}
 				onChange={handleChange}
 			>
-				<ToggleButton value="clients">
+				<ToggleButton value="clientes">
 					<Customer />
 					{!isCollapsed && 'Clientes'}
 				</ToggleButton>
-				<ToggleButton value="addresses">
+				<ToggleButton value="enderecos">
 					<Location />
 					{!isCollapsed && 'Endereços'}
 				</ToggleButton>

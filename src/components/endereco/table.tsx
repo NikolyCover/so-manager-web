@@ -18,7 +18,7 @@ interface Props {
 
 export const AddressTable = ({ requestParams, enableFilters = true, external = false, enabled = true }: Props) => {
 	const {
-		data: addresses,
+		data: enderecos,
 		totalElements,
 		isLoading,
 	} = useGetAll<Endereco>({
@@ -78,12 +78,12 @@ export const AddressTable = ({ requestParams, enableFilters = true, external = f
 		}),
 	] as ColumnDef<Endereco>[]
 
-	const getRowLink = useCallback((address: Endereco) => `${address.id}`, [])
+	const getRowLink = useCallback((endereco: Endereco) => `${endereco.id}`, [])
 
 	return (
 		<Table
 			columns={columns}
-			data={(external ? [addresses] : addresses) as unknown as Endereco[]}
+			data={(external ? [enderecos] : enderecos) as unknown as Endereco[]}
 			dataLength={totalElements}
 			getRowLink={getRowLink}
 			isLoading={isLoading}

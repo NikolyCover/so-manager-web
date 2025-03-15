@@ -1,7 +1,7 @@
 import { OverviewSection } from './overview'
 import { SearchByZipCodeSection } from './search-by-zip-code'
 import { SearchCitySection } from './search-city'
-import AddressForm from '@/components/address/form'
+import AddressForm from '@/components/endereco/form'
 import { RegisterButton } from '@/components/ui/inputs/button/register'
 import { openModal, useModal } from '@/components/ui/modal'
 import { useSectionNavigation } from '@/hooks/section-navigation'

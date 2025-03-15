@@ -11,7 +11,7 @@ import { formatCEP } from '@/utils/format-cep'
 
 export const AddressClientFormFields = () => {
 	const { control } = useFormContext<ClienteForm>()
-	const { data: addresses } = useGetAll<Endereco>({ endpoint: ENDPOINTS.ENDERECO })
+	const { data: enderecos } = useGetAll<Endereco>({ endpoint: ENDPOINTS.ENDERECO })
 
 	return (
 		<Stack gap={3}>
@@ -19,7 +19,7 @@ export const AddressClientFormFields = () => {
 				control={control}
 				name="endereco.id"
 				label="Endereço"
-				items={addresses.map((add) => ({
+				items={enderecos.map((add) => ({
 					label: `${add.logradouro.tipoLogradouro.nome} ${add.logradouro.nome} - Bairro ${add.bairro.nome}, ${add.cidade.nome} - ${add.cidade.unidadeFederativa.sigla}, ${formatCEP(add.cep)}`,
 					value: add.id,
 				}))}

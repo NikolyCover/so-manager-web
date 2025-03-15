@@ -1,5 +1,5 @@
-import ClientForm from '@/components/client/form'
-import { ClientTable } from '@/components/client/table'
+import ClientForm from '@/components/cliente/form'
+import { ClientTable } from '@/components/cliente/table'
 import { RegisterButton } from '@/components/ui/inputs/button/register'
 import { openModal, useModal } from '@/components/ui/modal'
 import { ViewLayout } from '@/layouts/view'
