@@ -51,9 +51,9 @@ export const enderecoFormSchema = z.object({
 		.min(8, 'CEP deve ter no mínimo 8 caracteres')
 		.max(9, 'CEP deve ter no máximo 9 caracteres')
 		.regex(/^\d{5}\d{3}$/, 'CEP inválido. Formato esperado: 00000000'),
-	idBairro: z.number(),
-	idLogradouro: z.number(),
-	idCidade: z.number(),
+	logradouro: z.object({ id: z.number() }),
+	bairro: z.object({ id: z.number() }),
+	cidade: z.object({ id: z.number() }),
 })
 
 export type EnderecoForm = z.output<typeof enderecoFormSchema>

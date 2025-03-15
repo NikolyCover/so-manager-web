@@ -6,7 +6,7 @@ import { validateCPF } from '@/utils/validate-cpf'
 
 export const enderecoEspecificoSchema = z.object({
 	numeroEndereco: z.string(),
-	complementEndereco: z.string(),
+	complementoEndereco: z.string(),
 	endereco: enderecoSchema,
 })
 
@@ -17,7 +17,7 @@ export const pessoaSchema = z.object({
 	nomeSocial: z.string().optional(),
 	emails: z.array(emailSchema),
 	telefones: z.array(phoneSchema),
-	enderecoEspecifico: enderecoEspecificoSchema.optional(),
+	endereco: enderecoEspecificoSchema.optional(),
 })
 
 export type Pessoa = z.output<typeof pessoaSchema>

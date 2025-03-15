@@ -7,18 +7,17 @@ import { ENDPOINTS } from '@/constants/endpoints'
 import { useGetAll } from '@/hooks/get'
 import { ClienteForm } from '@/schemas/cliente'
 import { Endereco } from '@/schemas/endereco'
-import { addressAPI } from '@/service/address'
 import { formatCEP } from '@/utils/format-cep'
 
 export const AddressClientFormFields = () => {
 	const { control } = useFormContext<ClienteForm>()
-	const { data: addresses } = useGetAll<Endereco>({ endpoint: ENDPOINTS.ADDRESS, api: addressAPI })
+	const { data: addresses } = useGetAll<Endereco>({ endpoint: ENDPOINTS.ENDERECO })
 
 	return (
 		<Stack gap={3}>
 			<ControlledSelect
 				control={control}
-				name="idEndereco"
+				name="endereco.id"
 				label="Endereço"
 				items={addresses.map((add) => ({
 					label: `${add.logradouro.tipoLogradouro.nome} ${add.logradouro.nome} - Bairro ${add.bairro.nome}, ${add.cidade.nome} - ${add.cidade.unidadeFederativa.sigla}, ${formatCEP(add.cep)}`,

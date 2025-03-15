@@ -5,9 +5,8 @@ import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 
 import Table from '@/components/ui/table'
 import { ENDPOINTS } from '@/constants/endpoints'
-import { useGetPageable } from '@/hooks/get'
+import { useGetAll } from '@/hooks/get'
 import { Endereco } from '@/schemas/endereco'
-import { addressAPI } from '@/service/address'
 import { formatCEP } from '@/utils/format-cep'
 
 interface Props {
@@ -22,11 +21,10 @@ export const AddressTable = ({ requestParams, enableFilters = true, external = f
 		data: addresses,
 		totalElements,
 		isLoading,
-	} = useGetPageable<Endereco>({
-		endpoint: external ? `${ENDPOINTS.ADDRESS}/${ENDPOINTS.EXTERNAL}` : ENDPOINTS.ADDRESS,
+	} = useGetAll<Endereco>({
+		endpoint: external ? ENDPOINTS.ENDERECO_EXTERNO : ENDPOINTS.ENDERECO,
 		enabled,
 		requestParams,
-		api: addressAPI,
 	})
 
 	const columnHelper = createColumnHelper<Endereco>()
@@ -85,7 +83,7 @@ export const AddressTable = ({ requestParams, enableFilters = true, external = f
 	return (
 		<Table
 			columns={columns}
-			data={addresses}
+			data={(external ? [addresses] : addresses) as unknown as Endereco[]}
 			dataLength={totalElements}
 			getRowLink={getRowLink}
 			isLoading={isLoading}

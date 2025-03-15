@@ -7,7 +7,6 @@ import { ENDPOINTS } from '@/constants/endpoints'
 import { useGetBy } from '@/hooks/get/get-by'
 import { ViewLayout } from '@/layouts/view'
 import { Cliente } from '@/schemas/cliente'
-import { personAPI } from '@/service/person'
 import { formatCPF } from '@/utils/format-cpf'
 import { formatPhone } from '@/utils/format-phone'
 
@@ -15,9 +14,8 @@ const CLientPage = () => {
 	const { clientId } = useParams()
 
 	const { data: client, isLoading } = useGetBy<Cliente>({
-		endpoint: ENDPOINTS.CLIENT,
+		endpoint: ENDPOINTS.CLIENTE,
 		id: clientId ?? '',
-		api: personAPI,
 	})
 
 	if (isLoading) return <FullHeightLoading />
@@ -42,17 +40,17 @@ const CLientPage = () => {
 				<Typography variant="h2">Endereço</Typography>
 
 				<Stack direction="row" justifyContent="space-between" flexWrap="wrap">
-					<Field label="Logradouro">{`${client.enderecoEspecifico?.endereco.logradouro.tipoLogradouro.nome} ${client.enderecoEspecifico?.endereco.logradouro.nome}`}</Field>
+					<Field label="Logradouro">{`${client.endereco?.endereco.logradouro.tipoLogradouro.nome} ${client.endereco?.endereco.logradouro.nome}`}</Field>
 
-					<Field label="Número">{client.enderecoEspecifico?.numeroEndereco}</Field>
+					<Field label="Número">{client.endereco?.numeroEndereco}</Field>
 
-					<Field label="Complemento">{client.enderecoEspecifico?.complementEndereco}</Field>
+					<Field label="Complemento">{client.endereco?.complementoEndereco}</Field>
 
-					<Field label="Bairro">{client.enderecoEspecifico?.endereco.bairro.nome}</Field>
+					<Field label="Bairro">{client.endereco?.endereco.bairro.nome}</Field>
 
-					<Field label="Cidade">{client.enderecoEspecifico?.endereco.cidade.nome}</Field>
+					<Field label="Cidade">{client.endereco?.endereco.cidade.nome}</Field>
 
-					<Field label="Unidade Federativa">{`${client.enderecoEspecifico?.endereco.cidade.unidadeFederativa.nome} (${client.enderecoEspecifico?.endereco.cidade.unidadeFederativa.sigla})`}</Field>
+					<Field label="Unidade Federativa">{`${client.endereco?.endereco.cidade.unidadeFederativa.nome} (${client.endereco?.endereco.cidade.unidadeFederativa.sigla})`}</Field>
 				</Stack>
 
 				<Stack gap={2}>
@@ -61,7 +59,7 @@ const CLientPage = () => {
 					{client.telefones.map((phone, index) => (
 						<Stack key={phone.id}>
 							<Field label={`Telefone ${index}`}>
-								{formatPhone(phone.ddi.ddi, phone.ddd.ddd, phone.numero)}
+								{formatPhone(phone.ddi.numero, phone.ddd.numero, phone.numero)}
 							</Field>
 						</Stack>
 					))}

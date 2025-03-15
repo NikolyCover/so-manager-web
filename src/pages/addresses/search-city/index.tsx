@@ -7,16 +7,14 @@ import { Field } from '@/components/ui/field'
 import { ENDPOINTS } from '@/constants/endpoints'
 import { useGetBy } from '@/hooks/get/get-by'
 import { Cidade } from '@/schemas/endereco'
-import { addressAPI } from '@/service/address'
 
 export const SearchCitySection = () => {
 	const [cityName, setCityName] = useState('')
 
 	const { data: city } = useGetBy<Cidade>({
-		endpoint: `${ENDPOINTS.CITY}/${ENDPOINTS.NAME}`,
+		endpoint: `${ENDPOINTS.CIDADE}/${ENDPOINTS.NOME}`,
 		id: cityName,
 		enabled: cityName != '',
-		api: addressAPI,
 	})
 
 	return (

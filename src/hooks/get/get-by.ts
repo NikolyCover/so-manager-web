@@ -1,24 +1,26 @@
 import { useEffect } from 'react'
 
 import { useQuery } from '@tanstack/react-query'
-import { AxiosInstance } from 'axios'
 import { toast } from 'react-toastify'
 
 import { Service } from '@/service'
+import { soAPI } from '@/service/api'
 
 interface ParamsGetBy {
 	endpoint: string
 	id: number | string
 	enabled?: boolean
-	api: AxiosInstance
 }
 
-export const useGetBy = <T extends object>({ endpoint, id, enabled, api }: ParamsGetBy) => {
-	const service = new Service<T>(api, endpoint)
+export const useGetBy = <T extends object>({ endpoint, id, enabled }: ParamsGetBy) => {
+	const service = new Service<T>(soAPI, endpoint)
 
 	const { data, error, isLoading } = useQuery({
 		queryKey: [endpoint, id],
-		queryFn: async () => await service.getBy(id),
+		queryFn: async () =>
+			await service.getBy({
+				id,
+			}),
 		enabled: id ? enabled : false,
 	})
 

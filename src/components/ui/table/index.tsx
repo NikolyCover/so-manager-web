@@ -1,15 +1,6 @@
 import { ReactNode } from 'react'
 
-import {
-	Table as MuiTable,
-	Stack,
-	TableBody,
-	TableCell,
-	TableContainer,
-	TableHead,
-	TablePagination,
-	TableRow,
-} from '@mui/material'
+import { Table as MuiTable, Stack, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
 import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table'
 import { Link } from 'react-router-dom'
 
@@ -33,13 +24,12 @@ export interface TableProps<T> {
 const Table = <T extends object>({
 	data,
 	columns,
-	dataLength,
 	isLoading,
 	getRowLink,
 	endTableControls,
 	getEndRowNode: getEndNode,
 }: TableProps<T>) => {
-	const { rowsPerPage, page, changePage, changeRowsPerPage } = usePagination()
+	const { rowsPerPage } = usePagination()
 
 	const { getHeaderGroups, getRowModel } = useReactTable({
 		data,
@@ -88,24 +78,6 @@ const Table = <T extends object>({
 						)}
 					</TableBody>
 				</MuiTable>
-
-				{data.length > 0 && !isLoading && (
-					<TablePagination
-						component="div"
-						count={dataLength}
-						rowsPerPage={rowsPerPage}
-						page={page}
-						onPageChange={(_e, pageIndex) => changePage(pageIndex)}
-						onRowsPerPageChange={(e) => changeRowsPerPage(Number(e.target.value))}
-						labelRowsPerPage="Linhas por página"
-						labelDisplayedRows={({ from, to, count }) => {
-							return `${from} a ${to} de ${count}`
-						}}
-						showLastButton
-						showFirstButton
-						rowsPerPageOptions={[5, 10, 20, 50, 100]}
-					/>
-				)}
 
 				{data.length === 0 && !isLoading && !isLoading && <TableNoDataWarning />}
 

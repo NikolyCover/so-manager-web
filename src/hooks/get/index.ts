@@ -1,13 +1,13 @@
 import { useCallback, useMemo } from 'react'
 
 import { useQuery } from '@tanstack/react-query'
-import { AxiosInstance } from 'axios'
 
 import { useFiltering } from '../filter/filtering'
 import { usePagination } from '../pagination'
 import { useSorting } from '../sorting'
 import { ReturnType } from '@/schemas/pageable'
 import { Service } from '@/service'
+import { soAPI } from '@/service/api'
 
 export interface GetParams {
 	endpoint: string
@@ -15,15 +15,14 @@ export interface GetParams {
 		[k: string]: unknown
 	}
 	enabled?: boolean
-	api: AxiosInstance
 }
 
-export const useGetAll = <T extends ReturnType>({ endpoint, requestParams, enabled, api }: GetParams) => {
-	const service = new Service<T>(api, endpoint)
+export const useGetAll = <T extends ReturnType>({ endpoint, requestParams, enabled }: GetParams) => {
+	const service = new Service<T>(soAPI, endpoint)
 
 	const queryFn = useCallback(async () => {
 		const data = await service.get({
-			size: 2_147_483_647,
+			//size: 2_147_483_647,
 			...requestParams,
 		})
 

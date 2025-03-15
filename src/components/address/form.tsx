@@ -1,11 +1,10 @@
 /* eslint-disable indent */
-import { RefObject, useCallback, useState } from 'react'
+import { RefObject, useCallback } from 'react'
 
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Stack } from '@mui/material'
 import { FormProvider, useForm } from 'react-hook-form'
 
-import Select from '../ui/inputs/select'
 import ControlledSelect from '../ui/inputs/select/controlled'
 import ControlledTextField from '../ui/inputs/text-field'
 import { ModalOptions, closeModal } from '@/components/ui/modal'
@@ -13,15 +12,7 @@ import ModalForm from '@/components/ui/modal-form'
 import { ENDPOINTS } from '@/constants/endpoints'
 import { useGetAll } from '@/hooks/get'
 import { useMutate } from '@/hooks/mutate'
-import {
-	EnderecoForm as AddressFormType,
-	Bairro,
-	Cidade,
-	Logradouro,
-	UnidadeFederativa,
-	enderecoFormSchema,
-} from '@/schemas/endereco'
-import { addressAPI } from '@/service/address'
+import { EnderecoForm as AddressFormType, Bairro, Cidade, Logradouro, enderecoFormSchema } from '@/schemas/endereco'
 import { theme } from '@/theme'
 import { getSchemaDefaults } from '@/utils/get-schema-defaults'
 
@@ -30,21 +21,20 @@ interface Props {
 }
 
 const AddressForm = ({ modalRef }: Props) => {
-	const [federalUnitAbbreviation, setFederalUnitAbbreviation] = useState('')
+	// const [federalUnitAbbreviation, setFederalUnitAbbreviation] = useState('')
 
 	const { create } = useMutate({
-		endpoint: ENDPOINTS.ADDRESS,
-		api: addressAPI,
+		endpoint: ENDPOINTS.CADASTRAR_ENDERECO,
+		invalidateQueries: [[ENDPOINTS.CADASTRAR_ENDERECO]],
 	})
 
-	const { data: locations } = useGetAll<Logradouro>({ endpoint: ENDPOINTS.LOCATION, api: addressAPI })
-	const { data: neighborhoods } = useGetAll<Bairro>({ endpoint: ENDPOINTS.NEIGHBORHOOD, api: addressAPI })
-	const { data: federalUnits } = useGetAll<UnidadeFederativa>({ endpoint: ENDPOINTS.FEDERAL_UNIT, api: addressAPI })
+	const { data: locations } = useGetAll<Logradouro>({ endpoint: ENDPOINTS.LOGRADOURO })
+	const { data: neighborhoods } = useGetAll<Bairro>({ endpoint: ENDPOINTS.BAIRRO })
+	// const { data: federalUnits } = useGetAll<UnidadeFederativa>({ endpoint: ENDPOINTS.UNIDADE_FEDERATIVA })
 	const { data: cities } = useGetAll<Cidade>({
-		endpoint: ENDPOINTS.CITY,
-		requestParams: { federalUnitAbbreviation },
-		enabled: federalUnitAbbreviation != '',
-		api: addressAPI,
+		endpoint: ENDPOINTS.CIDADE,
+		//requestParams: { federalUnitAbbreviation },
+		//enabled: federalUnitAbbreviation != '',
 	})
 
 	const form = useForm<AddressFormType>({
@@ -74,14 +64,14 @@ const AddressForm = ({ modalRef }: Props) => {
 				onSubmit={onSubmit}
 				title="Cadastrar Endereço"
 				width={theme.spacing(100)}
-				onClose={() => setFederalUnitAbbreviation('')}
+				//onClose={() => setFederalUnitAbbreviation('')}
 			>
 				<Stack gap={2}>
 					<ControlledTextField control={form.control} name="cep" label="CEP" />
 
 					<ControlledSelect
 						control={form.control}
-						name="idLogradouro"
+						name="logradouro.id"
 						label="Logradouro"
 						items={locations.map((location) => ({
 							label: location.nome,
@@ -91,7 +81,7 @@ const AddressForm = ({ modalRef }: Props) => {
 
 					<ControlledSelect
 						control={form.control}
-						name="idBairro"
+						name="bairro.id"
 						label="Bairro"
 						items={neighborhoods.map((neighborhood) => ({
 							label: neighborhood.nome,
@@ -99,7 +89,7 @@ const AddressForm = ({ modalRef }: Props) => {
 						}))}
 					/>
 
-					<Select
+					{/* <Select
 						label="Unidade Federativa"
 						items={federalUnits.map((federalUnit) => ({
 							label: federalUnit.nome,
@@ -107,11 +97,11 @@ const AddressForm = ({ modalRef }: Props) => {
 						}))}
 						value={federalUnitAbbreviation}
 						onChange={(e) => setFederalUnitAbbreviation(e.target.value as string)}
-					/>
+					/> */}
 
 					<ControlledSelect
 						control={form.control}
-						name="idCidade"
+						name="cidade.id"
 						label="Cidade"
 						items={cities.map((city) => ({
 							label: city.nome,

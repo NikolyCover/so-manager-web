@@ -5,9 +5,8 @@ import { ColumnDef, createColumnHelper } from '@tanstack/react-table'
 
 import Table from '@/components/ui/table'
 import { ENDPOINTS } from '@/constants/endpoints'
-import { useGetPageable } from '@/hooks/get'
+import { useGetAll } from '@/hooks/get'
 import { Cliente } from '@/schemas/cliente'
-import { personAPI } from '@/service/person'
 import { formatCPF } from '@/utils/format-cpf'
 
 interface Props {
@@ -21,11 +20,10 @@ export const ClientTable = ({ requestParams, enabled = true }: Props) => {
 		data: clients,
 		totalElements,
 		isLoading,
-	} = useGetPageable<Cliente>({
-		endpoint: ENDPOINTS.CLIENT,
+	} = useGetAll<Cliente>({
+		endpoint: ENDPOINTS.CLIENTE,
 		enabled,
 		requestParams,
-		api: personAPI,
 	})
 
 	const columnHelper = createColumnHelper<Cliente>()
@@ -47,18 +45,18 @@ export const ClientTable = ({ requestParams, enabled = true }: Props) => {
 			cell: (col) => formatCPF(col.cell.getValue()),
 			enableSorting: false,
 		}),
-		columnHelper.accessor('enderecoEspecifico.endereco.cidade.nome', {
-			id: 'enderecoEspecifico.endereco.cidade.nome',
+		columnHelper.accessor('endereco.endereco.cidade.nome', {
+			id: 'endereco.endereco.cidade.nome',
 			header: 'Cidade',
 			enableSorting: false,
 		}),
-		columnHelper.accessor('enderecoEspecifico.endereco.cidade.unidadeFederativa.sigla', {
-			id: 'enderecoEspecifico.endereco.cidade.unidadeFederativa.sigla',
+		columnHelper.accessor('endereco.endereco.cidade.unidadeFederativa.sigla', {
+			id: 'endereco.endereco.cidade.unidadeFederativa.sigla',
 			header: 'Unidade Federativa',
 			enableSorting: false,
 		}),
-		columnHelper.accessor('enderecoEspecifico.endereco.bairro.nome', {
-			id: 'enderecoEspecifico.endereco.bairro.nome',
+		columnHelper.accessor('endereco.endereco.bairro.nome', {
+			id: 'endereco.endereco.bairro.nome',
 			header: 'Bairro',
 			enableSorting: false,
 		}),

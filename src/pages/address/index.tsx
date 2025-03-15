@@ -6,15 +6,13 @@ import { ENDPOINTS } from '@/constants/endpoints'
 import { useGetBy } from '@/hooks/get/get-by'
 import { ViewLayout } from '@/layouts/view'
 import { Endereco } from '@/schemas/endereco'
-import { addressAPI } from '@/service/address'
 
 const AddressPage = () => {
 	const { addressId } = useParams()
 
 	const { data: address, isLoading } = useGetBy<Endereco>({
-		endpoint: ENDPOINTS.ADDRESS,
+		endpoint: ENDPOINTS.ENDERECO,
 		id: addressId ?? '',
-		api: addressAPI,
 	})
 
 	if (isLoading) return <FullHeightLoading />

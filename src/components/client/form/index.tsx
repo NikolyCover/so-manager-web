@@ -13,7 +13,6 @@ import ModalForm from '@/components/ui/modal-form'
 import { ENDPOINTS } from '@/constants/endpoints'
 import { useMutate } from '@/hooks/mutate'
 import { ClienteForm as ClientFormType, clienteFormSchema } from '@/schemas/cliente'
-import { personAPI } from '@/service/person'
 import { theme } from '@/theme'
 import { getSchemaDefaults } from '@/utils/get-schema-defaults'
 
@@ -23,8 +22,7 @@ interface Props {
 
 const ClientForm = ({ modalRef }: Props) => {
 	const { create } = useMutate({
-		endpoint: ENDPOINTS.CLIENT,
-		api: personAPI,
+		endpoint: ENDPOINTS.CADASTRAR_CLIENTE,
 	})
 
 	const form = useForm<ClientFormType>({

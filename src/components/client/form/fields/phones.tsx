@@ -11,13 +11,12 @@ import { ENDPOINTS } from '@/constants/endpoints'
 import { useGetAll } from '@/hooks/get'
 import { ClienteForm } from '@/schemas/cliente'
 import { DDD, DDI } from '@/schemas/telefone'
-import { personAPI } from '@/service/person'
 
 export const PhonesClientFormFields = () => {
 	const { control } = useFormContext<ClienteForm>()
 
-	const { data: ddds } = useGetAll<DDD>({ endpoint: ENDPOINTS.DDD, api: personAPI })
-	const { data: ddis } = useGetAll<DDI>({ endpoint: ENDPOINTS.DDI, api: personAPI })
+	const { data: ddds } = useGetAll<DDD>({ endpoint: ENDPOINTS.DDD })
+	const { data: ddis } = useGetAll<DDI>({ endpoint: ENDPOINTS.DDI })
 
 	const {
 		fields: phonesFields,
@@ -48,8 +47,8 @@ export const PhonesClientFormFields = () => {
 						name={`telefones.${index}.ddi`}
 						label="DDI"
 						items={ddis.map((ddi) => ({
-							label: ddi.ddi,
-							value: ddi.ddi,
+							label: ddi.numero,
+							value: ddi.numero,
 						}))}
 					/>
 					<ControlledSelect
@@ -57,8 +56,8 @@ export const PhonesClientFormFields = () => {
 						name={`telefones.${index}.ddd`}
 						label="DDD"
 						items={ddds.map((ddd) => ({
-							label: ddd.ddd,
-							value: ddd.ddd,
+							label: ddd.numero,
+							value: ddd.numero,
 						}))}
 					/>
 

@@ -1,13 +1,13 @@
 import z from './zod'
 
 export const ddiSchema = z.object({
-	ddi: z.string(),
+	numero: z.string(),
 })
 
 export type DDI = z.output<typeof ddiSchema>
 
 export const dddSchema = z.object({
-	ddd: z.string(),
+	numero: z.string(),
 })
 
 export type DDD = z.output<typeof dddSchema>
