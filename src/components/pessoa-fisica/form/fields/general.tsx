@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form'
 import ControlledTextField from '@/components/ui/inputs/text-field'
 import { ClienteForm } from '@/schemas/cliente'
 
-export const GeneralClientFormFields = () => {
+export const GeneralPessoaFisicaFormFields = () => {
 	const { control } = useFormContext<ClienteForm>()
 
 	return (

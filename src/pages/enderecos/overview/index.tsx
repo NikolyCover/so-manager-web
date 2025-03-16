@@ -1,5 +1,5 @@
-import { AddressTable } from '@/components/endereco/table'
+import { EnderecoTable } from '@/components/endereco/table'
 
 export const OverviewSection = () => {
-	return <AddressTable />
+	return <EnderecoTable />
 }

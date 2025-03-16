@@ -12,7 +12,7 @@ import { useGetAll } from '@/hooks/get'
 import { ClienteForm } from '@/schemas/cliente'
 import { DDD, DDI } from '@/schemas/telefone'
 
-export const PhonesClientFormFields = () => {
+export const TelefonesPessoaFisicaFormFields = () => {
 	const { control } = useFormContext<ClienteForm>()
 
 	const { data: ddds } = useGetAll<DDD>({ endpoint: ENDPOINTS.DDD })
@@ -29,8 +29,12 @@ export const PhonesClientFormFields = () => {
 
 	const addPhone = () =>
 		append({
-			ddd: '',
-			ddi: '',
+			ddd: {
+				numero: '',
+			},
+			ddi: {
+				numero: '',
+			},
 			numero: '',
 		})
 
@@ -44,7 +48,7 @@ export const PhonesClientFormFields = () => {
 				<Stack key={uuidv4()} direction="row" gap={3}>
 					<ControlledSelect
 						control={control}
-						name={`telefones.${index}.ddi`}
+						name={`telefones.${index}.ddi.numero`}
 						label="DDI"
 						items={ddis.map((ddi) => ({
 							label: ddi.numero,
@@ -53,7 +57,7 @@ export const PhonesClientFormFields = () => {
 					/>
 					<ControlledSelect
 						control={control}
-						name={`telefones.${index}.ddd`}
+						name={`telefones.${index}.ddd.numero`}
 						label="DDD"
 						items={ddds.map((ddd) => ({
 							label: ddd.numero,

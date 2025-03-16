@@ -10,17 +10,22 @@ interface ParamsGetBy {
 	endpoint: string
 	id: number | string
 	enabled?: boolean
+	idName?: string
 }
 
-export const useGetBy = <T extends object>({ endpoint, id, enabled }: ParamsGetBy) => {
+export const useGetBy = <T extends object>({ endpoint, id, enabled, idName }: ParamsGetBy) => {
 	const service = new Service<T>(soAPI, endpoint)
 
 	const { data, error, isLoading } = useQuery({
 		queryKey: [endpoint, id],
 		queryFn: async () =>
-			await service.getBy({
-				id,
-			}),
+			await service.getBy(
+				{
+					[idName ?? 'id']: id,
+				},
+				undefined,
+				idName
+			),
 		enabled: id ? enabled : false,
 	})
 

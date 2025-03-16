@@ -4,10 +4,10 @@ import { RefObject, useCallback } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormProvider, useForm } from 'react-hook-form'
 
-import { EmailsClientFormFields } from './fields/emails'
-import { AddressClientFormFields } from './fields/endereco'
-import { GeneralClientFormFields } from './fields/general'
-import { PhonesClientFormFields } from './fields/telefones'
+import { EmailsPessoaFisicaFormFields } from './fields/emails'
+import { EnderecoPessoaFisicaFormFields } from './fields/endereco'
+import { GeneralPessoaFisicaFormFields } from './fields/general'
+import { TelefonesPessoaFisicaFormFields } from './fields/telefones'
 import { ModalOptions, closeModal } from '@/components/ui/modal'
 import ModalForm from '@/components/ui/modal-form'
 import { ENDPOINTS } from '@/constants/endpoints'
@@ -18,11 +18,13 @@ import { getSchemaDefaults } from '@/utils/get-schema-defaults'
 
 interface Props {
 	modalRef: RefObject<ModalOptions>
+	type: 'client' | 'funcionario'
 }
 
-const ClientForm = ({ modalRef }: Props) => {
+const PessoaFisicaForm = ({ modalRef, type }: Props) => {
 	const { create } = useMutate({
-		endpoint: ENDPOINTS.CADASTRAR_CLIENTE,
+		endpoint: type == 'client' ? ENDPOINTS.CADASTRAR_CLIENTE : ENDPOINTS.CADASTRAR_FUNCIONARIO,
+		invalidateQueries: [[ENDPOINTS.CLIENTE], [ENDPOINTS.FUNCIONARIO]],
 	})
 
 	const form = useForm<ClientFormType>({
@@ -39,10 +41,11 @@ const ClientForm = ({ modalRef }: Props) => {
 
 			await create({
 				body: params,
-				successMessage: 'Cliente cadastrado com sucesso!',
+				successMessage:
+					type == 'client' ? 'Cliente cadastrado com sucesso!' : 'Funcionario cadastrado com sucesso!',
 			})
 		},
-		[modalRef]
+		[modalRef, type]
 	)
 
 	return (
@@ -50,28 +53,28 @@ const ClientForm = ({ modalRef }: Props) => {
 			<ModalForm
 				modalRef={modalRef}
 				onSubmit={onSubmit}
-				title="Cadastrar Cliente"
+				title={type == 'client' ? 'Cadastrar Cliente' : 'Cadastrar Funcionario'}
 				width={theme.spacing(100)}
 				steps={[
 					{
 						label: 'Geral',
 						fields: ['primeiroNome', 'nomeDoMeio', 'ultimoNome', 'nomeSocial', 'cpf'],
-						component: <GeneralClientFormFields />,
+						component: <GeneralPessoaFisicaFormFields />,
 					},
 					{
 						label: 'Endereço',
 						fields: ['idEndereco', 'numeroEndereco', 'complementoEndereco'],
-						component: <AddressClientFormFields />,
+						component: <EnderecoPessoaFisicaFormFields />,
 					},
 					{
 						label: 'Telefones',
 						fields: ['telefones'],
-						component: <PhonesClientFormFields />,
+						component: <TelefonesPessoaFisicaFormFields />,
 					},
 					{
 						label: 'Emails',
 						fields: ['emails'],
-						component: <EmailsClientFormFields />,
+						component: <EmailsPessoaFisicaFormFields />,
 					},
 				]}
 			/>
@@ -79,4 +82,4 @@ const ClientForm = ({ modalRef }: Props) => {
 	)
 }
 
-export default ClientForm
+export default PessoaFisicaForm

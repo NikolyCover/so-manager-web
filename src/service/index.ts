@@ -40,8 +40,8 @@ export class Service<T extends ReturnType> {
 		return await this.axiosInstance.patch<T>(endpoint ?? this.endpoint, body)
 	}
 
-	async getBy<P extends ReturnType = T>(params: Params, endpoint?: string): Promise<P> {
-		const response = await this.axiosInstance.get<P>(`/${endpoint ?? this.endpoint}/id`, {
+	async getBy<P extends ReturnType = T>(params: Params, endpoint?: string, idName?: string): Promise<P> {
+		const response = await this.axiosInstance.get<P>(`/${endpoint ?? this.endpoint}/${idName ?? 'id'}`, {
 			params,
 			paramsSerializer,
 		})

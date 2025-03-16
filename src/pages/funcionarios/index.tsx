@@ -4,25 +4,25 @@ import { RegisterButton } from '@/components/ui/inputs/button/register'
 import { openModal, useModal } from '@/components/ui/modal'
 import { ViewLayout } from '@/layouts/view'
 
-const ClientsPage = () => {
+const FuncionariosPage = () => {
 	const modalRef = useModal()
 
 	return (
 		<ViewLayout.Root>
 			<ViewLayout.Header.Root>
-				<ViewLayout.Header.Title>Clientes</ViewLayout.Header.Title>
+				<ViewLayout.Header.Title>Funcionarios</ViewLayout.Header.Title>
 				<ViewLayout.Header.RightElements>
 					<RegisterButton onClick={openModal(modalRef)} />
 				</ViewLayout.Header.RightElements>
 			</ViewLayout.Header.Root>
 
 			<ViewLayout.Content>
-				<PessoaFisicaTable type="client" />
+				<PessoaFisicaTable type="funcionario" />
 
-				<PessoaFisicaForm modalRef={modalRef} type="client" />
+				<PessoaFisicaForm modalRef={modalRef} type="funcionario" />
 			</ViewLayout.Content>
 		</ViewLayout.Root>
 	)
 }
 
-export default ClientsPage
+export default FuncionariosPage

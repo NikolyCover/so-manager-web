@@ -3,7 +3,7 @@ export const ENDPOINTS = {
 	CADASTRAR_ENDERECO: 'endereco/cadastrar',
 	ENDERECO_EXTERNO: 'endereco/externo/cep',
 	CLIENTE: 'cliente',
-	CADASTRAR_CLIENTE: 'endereco/cadastrar',
+	CADASTRAR_CLIENTE: 'cliente/cadastrar',
 	CIDADE: 'endereco/cidade',
 	NOME: 'nome',
 	LOGRADOURO: 'endereco/logradouro',
@@ -11,4 +11,9 @@ export const ENDPOINTS = {
 	UNIDADE_FEDERATIVA: 'endereco/unidade-federativa',
 	DDD: 'telefone/ddd',
 	DDI: 'telefone/ddi',
+	OS: 'ordem-servico',
+	CADASTRAR_OS: 'ordem-servico/cadastrar',
+	FUNCIONARIO: 'funcionario',
+	CADASTRAR_FUNCIONARIO: 'funcionario/cadastrar',
+	TIPO_SERVICO: 'tipo-servico',
 }

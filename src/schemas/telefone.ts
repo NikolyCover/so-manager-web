@@ -20,8 +20,8 @@ export const phoneSchema = z.object({
 })
 
 export const phoneFormSchema = phoneSchema.omit({ id: true }).extend({
-	ddi: z.string().min(1, 'DDI é obrigatório'),
-	ddd: z.string().min(1, 'DDD é obrigatório'),
+	ddi: z.object({ numero: z.string().min(1, 'DDI é obrigatório') }),
+	ddd: z.object({ numero: z.string().min(1, 'DDD é obrigatório') }),
 })
 
 export type Phone = z.output<typeof phoneSchema>

@@ -8,7 +8,7 @@ import { v4 as uuidv4 } from 'uuid'
 import ControlledTextField from '@/components/ui/inputs/text-field'
 import { ClienteForm } from '@/schemas/cliente'
 
-export const EmailsClientFormFields = () => {
+export const EmailsPessoaFisicaFormFields = () => {
 	const { control } = useFormContext<ClienteForm>()
 
 	const {

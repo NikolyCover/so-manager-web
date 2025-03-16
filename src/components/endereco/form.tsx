@@ -20,12 +20,12 @@ interface Props {
 	modalRef: RefObject<ModalOptions>
 }
 
-const AddressForm = ({ modalRef }: Props) => {
+const EnderecoForm = ({ modalRef }: Props) => {
 	// const [federalUnitAbbreviation, setFederalUnitAbbreviation] = useState('')
 
 	const { create } = useMutate({
 		endpoint: ENDPOINTS.CADASTRAR_ENDERECO,
-		invalidateQueries: [[ENDPOINTS.CADASTRAR_ENDERECO]],
+		invalidateQueries: [[ENDPOINTS.ENDERECO_EXTERNO], [ENDPOINTS.ENDERECO]],
 	})
 
 	const { data: locations } = useGetAll<Logradouro>({ endpoint: ENDPOINTS.LOGRADOURO })
@@ -114,4 +114,4 @@ const AddressForm = ({ modalRef }: Props) => {
 	)
 }
 
-export default AddressForm
+export default EnderecoForm

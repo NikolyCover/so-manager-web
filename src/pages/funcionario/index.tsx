@@ -5,31 +5,31 @@ import FullHeightLoading from '@/components/ui/feedback/loading/full-height'
 import { ENDPOINTS } from '@/constants/endpoints'
 import { useGetBy } from '@/hooks/get/get-by'
 import { ViewLayout } from '@/layouts/view'
-import { Cliente } from '@/schemas/cliente'
+import { Funcionario } from '@/schemas/funcionario'
 
-const CLientPage = () => {
-	const { clientId } = useParams()
+const FuncionarioPage = () => {
+	const { funcionarioId } = useParams()
 
-	const { data: cliente, isLoading } = useGetBy<Cliente>({
-		endpoint: ENDPOINTS.CLIENTE,
-		id: clientId ?? '',
+	const { data: funcionario, isLoading } = useGetBy<Funcionario>({
+		endpoint: ENDPOINTS.FUNCIONARIO,
+		id: funcionarioId ?? '',
 	})
 
 	if (isLoading) return <FullHeightLoading />
 
-	if (!cliente) return null
+	if (!funcionario) return null
 
 	return (
 		<ViewLayout.Root>
 			<ViewLayout.Header.Root>
-				<ViewLayout.Header.Title goBack>{`Cliente ${cliente.nome ?? ''}`}</ViewLayout.Header.Title>
+				<ViewLayout.Header.Title goBack>{`Funcionario ${funcionario.nome ?? ''}`}</ViewLayout.Header.Title>
 			</ViewLayout.Header.Root>
 
 			<ViewLayout.Content>
-				<PesosoaFisicaDetails pessoa={cliente} />
+				<PesosoaFisicaDetails pessoa={funcionario} />
 			</ViewLayout.Content>
 		</ViewLayout.Root>
 	)
 }
 
-export default CLientPage
+export default FuncionarioPage

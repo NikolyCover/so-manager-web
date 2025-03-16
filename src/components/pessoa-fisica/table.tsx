@@ -7,28 +7,30 @@ import Table from '@/components/ui/table'
 import { ENDPOINTS } from '@/constants/endpoints'
 import { useGetAll } from '@/hooks/get'
 import { Cliente } from '@/schemas/cliente'
+import { Funcionario } from '@/schemas/funcionario'
 import { formatCPF } from '@/utils/format-cpf'
 
 interface Props {
 	enableFilters?: boolean
 	requestParams?: Record<string, string>
 	enabled?: boolean
+	type: 'client' | 'funcionario'
 }
 
-export const ClientTable = ({ requestParams, enabled = true }: Props) => {
+export const PessoaFisicaTable = ({ requestParams, enabled = true, type }: Props) => {
 	const {
 		data: clientes,
 		totalElements,
 		isLoading,
-	} = useGetAll<Cliente>({
-		endpoint: ENDPOINTS.CLIENTE,
+	} = useGetAll<Cliente | Funcionario>({
+		endpoint: type == 'client' ? ENDPOINTS.CLIENTE : ENDPOINTS.FUNCIONARIO,
 		enabled,
 		requestParams,
 	})
 
-	const columnHelper = createColumnHelper<Cliente>()
+	const columnHelper = createColumnHelper<Cliente | Funcionario>()
 
-	const columns: ColumnDef<Cliente>[] = [
+	const columns: ColumnDef<Cliente | Funcionario>[] = [
 		columnHelper.accessor('nome', {
 			id: 'nome',
 			header: 'nome',
@@ -60,7 +62,7 @@ export const ClientTable = ({ requestParams, enabled = true }: Props) => {
 			header: 'Bairro',
 			enableSorting: false,
 		}),
-	] as ColumnDef<Cliente>[]
+	] as ColumnDef<Cliente | Funcionario>[]
 
 	const getRowLink = useCallback((cliente: Cliente) => `${cliente.id}`, [])
 

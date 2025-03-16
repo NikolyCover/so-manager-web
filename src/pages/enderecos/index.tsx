@@ -1,7 +1,7 @@
 import { OverviewSection } from './overview'
 import { SearchByZipCodeSection } from './search-by-zip-code'
 import { SearchCitySection } from './search-city'
-import AddressForm from '@/components/endereco/form'
+import EnderecoForm from '@/components/endereco/form'
 import { RegisterButton } from '@/components/ui/inputs/button/register'
 import { openModal, useModal } from '@/components/ui/modal'
 import { useSectionNavigation } from '@/hooks/section-navigation'
@@ -46,7 +46,7 @@ const AddressesPage = () => {
 				{section == 'search-by-zip-code' && <SearchByZipCodeSection />}
 				{section == 'search-city' && <SearchCitySection />}
 
-				<AddressForm modalRef={modalRef} />
+				<EnderecoForm modalRef={modalRef} />
 			</ViewLayout.Content>
 		</ViewLayout.Root>
 	)

@@ -16,7 +16,7 @@ interface Props {
 	enabled?: boolean
 }
 
-export const AddressTable = ({ requestParams, enableFilters = true, external = false, enabled = true }: Props) => {
+export const EnderecoTable = ({ requestParams, enableFilters = true, external = false, enabled = true }: Props) => {
 	const {
 		data: enderecos,
 		totalElements,

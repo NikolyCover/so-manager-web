@@ -10,6 +10,10 @@ const AddressesPage = lazy(() => import('@/pages/enderecos'))
 const AddressPage = lazy(() => import('@/pages/endereco'))
 const ClientsPage = lazy(() => import('@/pages/clientes'))
 const ClientPage = lazy(() => import('@/pages/cliente'))
+const FuncionariosPage = lazy(() => import('@/pages/funcionarios'))
+const FuncionarioPage = lazy(() => import('@/pages/funcionario'))
+const OrdensDeServicosPage = lazy(() => import('@/pages/ordens-de-servicos'))
+const OrdemDeServicoPage = lazy(() => import('@/pages/ordem-de-servico'))
 
 export const router = createBrowserRouter([
 	{
@@ -25,6 +29,19 @@ export const router = createBrowserRouter([
 						element: <Navigate to="clientes" />,
 					},
 					{
+						path: 'ordens-de-servicos',
+						children: [
+							{
+								index: true,
+								element: <OrdensDeServicosPage />,
+							},
+							{
+								path: ':osId',
+								element: <OrdemDeServicoPage />,
+							},
+						],
+					},
+					{
 						path: 'clientes',
 						children: [
 							{
@@ -34,6 +51,19 @@ export const router = createBrowserRouter([
 							{
 								path: ':clientId',
 								element: <ClientPage />,
+							},
+						],
+					},
+					{
+						path: 'funcionarios',
+						children: [
+							{
+								index: true,
+								element: <FuncionariosPage />,
+							},
+							{
+								path: ':funcionarioId',
+								element: <FuncionarioPage />,
 							},
 						],
 					},

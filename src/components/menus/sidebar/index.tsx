@@ -1,4 +1,4 @@
-import { Customer, Location } from '@carbon/icons-react'
+import { Customer, Document, Location, Person } from '@carbon/icons-react'
 import { ToggleButton } from '@mui/material'
 import { useAtomValue } from 'jotai'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -29,6 +29,14 @@ export const Sidebar = () => {
 				value={pathname.split('/')[1]}
 				onChange={handleChange}
 			>
+				<ToggleButton value="ordens-de-servicos">
+					<Document />
+					{!isCollapsed && 'Ordens de Serviço'}
+				</ToggleButton>
+				<ToggleButton value="funcionarios">
+					<Person />
+					{!isCollapsed && 'Funcionarios'}
+				</ToggleButton>
 				<ToggleButton value="clientes">
 					<Customer />
 					{!isCollapsed && 'Clientes'}
