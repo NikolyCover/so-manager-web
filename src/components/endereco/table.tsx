@@ -22,7 +22,7 @@ export const EnderecoTable = ({ requestParams, enableFilters = true, external = 
 		totalElements,
 		isLoading,
 	} = useGetAll<Endereco>({
-		endpoint: external ? ENDPOINTS.ENDERECO_EXTERNO : ENDPOINTS.ENDERECO,
+		endpoint: external ? ENDPOINTS.ENDERECO_EXTERNO : ENDPOINTS.ENDERECO_POR_CEP,
 		enabled,
 		requestParams,
 	})

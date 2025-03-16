@@ -47,8 +47,6 @@ export const OrdemDeServicoForm = ({ modalRef }: Props) => {
 		[modalRef]
 	)
 
-	console.log(form.getValues())
-
 	return (
 		<FormProvider {...form}>
 			<ModalForm

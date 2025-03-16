@@ -1,6 +1,6 @@
 import { OverviewSection } from './overview'
-import { SearchByZipCodeSection } from './search-by-zip-code'
-import { SearchCitySection } from './search-city'
+import { SearchCitySection } from './search-cidade'
+import { SearchByZipCodeSection } from './search-por-cep'
 import EnderecoForm from '@/components/endereco/form'
 import { RegisterButton } from '@/components/ui/inputs/button/register'
 import { openModal, useModal } from '@/components/ui/modal'

@@ -12,9 +12,10 @@ export const SearchCitySection = () => {
 	const [cityName, setCityName] = useState('')
 
 	const { data: city } = useGetBy<Cidade>({
-		endpoint: `${ENDPOINTS.CIDADE}/${ENDPOINTS.NOME}`,
+		endpoint: ENDPOINTS.CIDADE,
 		id: cityName,
 		enabled: cityName != '',
+		idName: 'nome',
 	})
 
 	return (
