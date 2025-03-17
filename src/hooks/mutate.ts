@@ -45,7 +45,7 @@ export const useMutate = <T extends object, P extends object = object>({
 
 			for (const key of invalidateQueries) queryClient.invalidateQueries({ queryKey: key })
 
-			if (successMessage) {
+			if (successMessage && successMessage.length > 0) {
 				toast.success(successMessage)
 			}
 		},

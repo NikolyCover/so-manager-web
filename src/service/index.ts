@@ -1,7 +1,7 @@
 import { AxiosInstance, AxiosResponse } from 'axios'
 import qs from 'qs'
 
-import { Pageable, ReturnType } from '@/schemas/pageable'
+import { ReturnType } from '@/schemas/pageable'
 
 export interface Params {
 	[k: string]: unknown
@@ -19,8 +19,8 @@ export class Service<T extends ReturnType> {
 		private endpoint: string
 	) {}
 
-	async get<P extends ReturnType = T>(params: Params, endpoint?: string): Promise<Pageable<P>> {
-		const response = await this.axiosInstance.get<Pageable<P>>(`/${endpoint ?? this.endpoint}`, {
+	async get<P extends ReturnType = T>(params: Params, endpoint?: string): Promise<P[]> {
+		const response = await this.axiosInstance.get<P[]>(`/${endpoint ?? this.endpoint}`, {
 			params,
 			paramsSerializer,
 		})

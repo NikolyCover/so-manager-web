@@ -1,6 +1,7 @@
 import { Stack, StackProps, styled, toggleButtonClasses } from '@mui/material'
 import ToggleButtonGroup, { ToggleButtonGroupProps } from '@mui/material/ToggleButtonGroup'
 
+import { PRIMARY_COLOR_MEDIUM } from '@/constants/color'
 import { HEADER_HEIGHT, SIDEBAR_COLLAPSED_WIDTH, SIDEBAR_WIDTH } from '@/constants/layout'
 
 export interface SidebarContainerProps extends StackProps {
@@ -27,12 +28,12 @@ export const StyledToggleButtonGroup = styled(ToggleButtonGroup)<ToggleButtonGro
 	display: 'flex',
 
 	'& svg': {
-		fill: '#9fb3ab',
-		color: '#9fb3ab',
+		fill: PRIMARY_COLOR_MEDIUM,
+		color: PRIMARY_COLOR_MEDIUM,
 	},
 
 	[`& .${toggleButtonClasses.root}`]: {
-		color: '#9fb3ab',
+		color: PRIMARY_COLOR_MEDIUM,
 		fontWeight: 300,
 	},
 	'& .MuiButtonBase-root.Mui-selected': {

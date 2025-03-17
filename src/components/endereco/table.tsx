@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-nested-conditional */
 /* eslint-disable prettier/prettier */
 import { useCallback } from 'react'
 
@@ -22,7 +23,11 @@ export const EnderecoTable = ({ requestParams, enableFilters = true, external = 
 		totalElements,
 		isLoading,
 	} = useGetAll<Endereco>({
-		endpoint: external ? ENDPOINTS.ENDERECO_EXTERNO : ENDPOINTS.ENDERECO_POR_CEP,
+		endpoint: external
+			? ENDPOINTS.ENDERECO_EXTERNO
+			: requestParams
+				? ENDPOINTS.ENDERECO_POR_CEP
+				: ENDPOINTS.ENDERECO,
 		enabled,
 		requestParams,
 	})

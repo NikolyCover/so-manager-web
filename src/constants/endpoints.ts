@@ -16,4 +16,5 @@ export const ENDPOINTS = {
 	FUNCIONARIO: 'funcionario',
 	CADASTRAR_FUNCIONARIO: 'funcionario/cadastrar',
 	TIPO_SERVICO: 'tipo-servico',
+	CHATBOT: 'chatbot',
 }

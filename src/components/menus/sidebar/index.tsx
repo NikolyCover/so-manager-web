@@ -1,4 +1,4 @@
-import { Customer, Document, Location, Person } from '@carbon/icons-react'
+import { ChatBot, Customer, Document, Location, Person } from '@carbon/icons-react'
 import { ToggleButton } from '@mui/material'
 import { useAtomValue } from 'jotai'
 import { useLocation, useNavigate } from 'react-router-dom'
@@ -44,6 +44,10 @@ export const Sidebar = () => {
 				<ToggleButton value="enderecos">
 					<Location />
 					{!isCollapsed && 'Endereços'}
+				</ToggleButton>
+				<ToggleButton value="chatbot">
+					<ChatBot />
+					{!isCollapsed && 'Chatbot'}
 				</ToggleButton>
 			</StyledToggleButtonGroup>
 		</SidebarContainer>

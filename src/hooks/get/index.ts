@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react'
 
 import { useQuery } from '@tanstack/react-query'
+import { data } from 'react-router-dom'
 
 import { useFiltering } from '../filter/filtering'
 import { usePagination } from '../pagination'
@@ -27,8 +28,7 @@ export const useGetAll = <T extends ReturnType>({ endpoint, requestParams, enabl
 		})
 
 		return {
-			data: (data?.content || data) ?? [],
-			totalElements: data?.totalElements ?? 0,
+			data: data ?? [],
 		}
 	}, [requestParams, service])
 
@@ -42,7 +42,7 @@ export const useGetAll = <T extends ReturnType>({ endpoint, requestParams, enabl
 
 	return {
 		data: response?.data ?? [],
-		totalElements: response?.totalElements ?? 0,
+		totalElements: data.length,
 		...queryReturn,
 	}
 }
