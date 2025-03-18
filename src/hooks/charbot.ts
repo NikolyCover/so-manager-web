@@ -9,8 +9,9 @@ import { ChatbotResponse, Intencao } from '@/schemas/chatbot'
 import { Cliente } from '@/schemas/cliente'
 import { Funcionario } from '@/schemas/funcionario'
 import { OrdemDeServico } from '@/schemas/os'
-import { Service } from '@/service'
-import { soAPI } from '@/service/api'
+import { TipoServico } from '@/schemas/servico'
+import { Servico } from '@/servico'
+import { soAPI } from '@/servico/api'
 import { ChatbotMessage } from '@/types/chatbot'
 import {
 	formatarCliente,
@@ -18,13 +19,15 @@ import {
 	formatarListaClientes,
 	formatarListaFuncionarios,
 	formatarListaOrdensDeServico,
+	formatarListaTiposServico,
 	formatarOrdemDeServico,
+	formatarTipoServico,
 } from '@/utils/chatbot'
 
 const DEFAULT_MESSAGE = 'Lamento, não foi possível encontrar uma resposta para sua pergunta!'
 
 export const useChatbot = () => {
-	const service = new Service<ChatbotResponse>(soAPI, ENDPOINTS.CHATBOT)
+	const service = new Servico<ChatbotResponse>(soAPI, ENDPOINTS.CHATBOT)
 
 	const [messages, setMessages] = useAtom(messagesAtom)
 	const [isLoading, setIsLoading] = useState(false)
@@ -39,68 +42,56 @@ export const useChatbot = () => {
 	}
 
 	const handleIntecao = async (intencao: Intencao, dados: string | null) => {
-		switch (intencao) {
-			case 'OBTER_CLIENTE_POR_ID': {
-				const response = await service.getBy<Cliente>({ id: dados }, ENDPOINTS.CLIENTE)
-
-				if (response) {
-					return formatarCliente(response)
+		try {
+			switch (intencao) {
+				case 'OBTER_CLIENTE_POR_ID': {
+					const response = await service.getPorId<Cliente>({ id: dados }, ENDPOINTS.CLIENTE)
+					return response ? formatarCliente(response) : DEFAULT_MESSAGE
 				}
 
-				break
-			}
-
-			case 'OBTER_FUNCIONARIO_POR_ID': {
-				const response = await service.getBy<Funcionario>({ id: dados }, ENDPOINTS.FUNCIONARIO)
-
-				if (response) {
-					return formatarFuncionario(response)
+				case 'OBTER_FUNCIONARIO_POR_ID': {
+					const response = await service.getPorId<Funcionario>({ id: dados }, ENDPOINTS.FUNCIONARIO)
+					return response ? formatarFuncionario(response) : DEFAULT_MESSAGE
 				}
 
-				break
-			}
-
-			case 'OBTER_ORDEM_SERVICO_POR_NUMERO': {
-				const response = await service.getBy<OrdemDeServico>({ numero: dados }, ENDPOINTS.OS, 'numero')
-
-				if (response) {
-					return formatarOrdemDeServico(response)
+				case 'OBTER_ORDEM_SERVICO_POR_NUMERO': {
+					const response = await service.getPorId<OrdemDeServico>({ numero: dados }, ENDPOINTS.OS, 'numero')
+					return response ? formatarOrdemDeServico(response) : DEFAULT_MESSAGE
 				}
 
-				break
-			}
-
-			case 'OBTER_ORDEM_SERVICOS': {
-				const response = await service.get<OrdemDeServico>({}, ENDPOINTS.OS)
-
-				if (response) {
-					return formatarListaOrdensDeServico(response)
+				case 'OBTER_ORDEM_SERVICOS': {
+					const response = await service.get<OrdemDeServico>({}, ENDPOINTS.OS)
+					return response ? formatarListaOrdensDeServico(response) : DEFAULT_MESSAGE
 				}
 
-				break
-			}
-
-			case 'OBTER_CLIENTES': {
-				const response = await service.get<Cliente>({}, ENDPOINTS.CLIENTE)
-
-				if (response) {
-					return formatarListaClientes(response)
+				case 'OBTER_CLIENTES': {
+					const response = await service.get<Cliente>({}, ENDPOINTS.CLIENTE)
+					return response ? formatarListaClientes(response) : DEFAULT_MESSAGE
 				}
 
-				break
-			}
-
-			case 'OBTER_FUNCIONARIOS': {
-				const response = await service.get<Funcionario>({}, ENDPOINTS.FUNCIONARIO)
-
-				if (response) {
-					return formatarListaFuncionarios(response)
+				case 'OBTER_FUNCIONARIOS': {
+					const response = await service.get<Funcionario>({}, ENDPOINTS.FUNCIONARIO)
+					return response ? formatarListaFuncionarios(response) : DEFAULT_MESSAGE
 				}
 
-				break
+				case 'OBTER_TIPOS_SERVICOS': {
+					const response = await service.get<TipoServico>({}, ENDPOINTS.TIPO_SERVICO)
+					return response ? formatarListaTiposServico(response) : DEFAULT_MESSAGE
+				}
+
+				case 'OBTER_TIPO_SERVICO_POR_ID': {
+					const response = await service.getPorId<TipoServico>({ id: dados }, ENDPOINTS.TIPO_SERVICO)
+					return response ? formatarTipoServico(response) : DEFAULT_MESSAGE
+				}
+
+				default: {
+					return DEFAULT_MESSAGE
+				}
 			}
+		} catch (error) {
+			console.error(`Erro ao processar intenção ${intencao}:`, error)
+			return DEFAULT_MESSAGE
 		}
-		return ''
 	}
 
 	const sendMessage = async (message: string) => {
@@ -108,7 +99,7 @@ export const useChatbot = () => {
 
 		setIsLoading(true)
 
-		const response = await service.getOne({
+		const response = await service.getObject({
 			mensagem: message,
 		})
 

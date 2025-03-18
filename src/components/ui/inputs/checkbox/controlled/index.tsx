@@ -48,8 +48,8 @@ const ControlledCheckbox = <F extends object, T = string>({
 								? checked
 									? [...fieldValue, formatValue(value)]
 									: (fieldValue as Array<unknown>).filter((item) =>
-										isDifferent(item as T, value as T)
-									)
+											isDifferent(item as T, value as T)
+										)
 								: formatValue(checked)
 
 							field.onChange(newValue)

@@ -38,14 +38,7 @@ const Chatbot: FC = () => {
 
 			<ViewLayout.Content>
 				<Stack justifyContent="space-between" gap={3}>
-					<Stack
-						//bgcolor={(theme) => theme.palette.juicy.neutral[20]}
-						width="100%"
-						height="70vh"
-						p={3}
-						gap={3}
-						sx={{ overflowY: 'auto' }}
-					>
+					<Stack width="100%" height="70vh" p={3} gap={3} sx={{ overflowY: 'auto' }}>
 						<Message
 							sender="bot"
 							text="Olá! Sou o SO, o assistente virtual do SO Manager. Como posso te ajudar? 😊"

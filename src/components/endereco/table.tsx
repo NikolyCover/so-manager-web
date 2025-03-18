@@ -40,8 +40,8 @@ export const EnderecoTable = ({ requestParams, enableFilters = true, external = 
 			header: 'CEP',
 			meta: enableFilters
 				? {
-					filter: { type: 'text', id: 'cep' },
-				}
+						filter: { type: 'text', id: 'cep' },
+					}
 				: undefined,
 			cell: (cel) => formatCEP(cel.getValue()),
 		}),
@@ -50,8 +50,8 @@ export const EnderecoTable = ({ requestParams, enableFilters = true, external = 
 			header: 'Logradouro',
 			meta: enableFilters
 				? {
-					filter: { type: 'text', id: 'nomeLogradouro' },
-				}
+						filter: { type: 'text', id: 'nomeLogradouro' },
+					}
 				: undefined,
 		}),
 		columnHelper.accessor('bairro.nome', {
@@ -59,8 +59,8 @@ export const EnderecoTable = ({ requestParams, enableFilters = true, external = 
 			header: 'Bairro',
 			meta: enableFilters
 				? {
-					filter: { type: 'text', id: 'nomeBairro' },
-				}
+						filter: { type: 'text', id: 'nomeBairro' },
+					}
 				: undefined,
 		}),
 		columnHelper.accessor('cidade.nome', {
@@ -68,8 +68,8 @@ export const EnderecoTable = ({ requestParams, enableFilters = true, external = 
 			header: 'Cidade',
 			meta: enableFilters
 				? {
-					filter: { type: 'text', id: 'nomeCidade' },
-				}
+						filter: { type: 'text', id: 'nomeCidade' },
+					}
 				: undefined,
 		}),
 		columnHelper.accessor('cidade.unidadeFederativa.nome', {
@@ -77,8 +77,8 @@ export const EnderecoTable = ({ requestParams, enableFilters = true, external = 
 			header: 'Unidade Federativa',
 			meta: enableFilters
 				? {
-					filter: { type: 'text', id: 'nomeUnidadeFederativa' },
-				}
+						filter: { type: 'text', id: 'nomeUnidadeFederativa' },
+					}
 				: undefined,
 		}),
 	] as ColumnDef<Endereco>[]

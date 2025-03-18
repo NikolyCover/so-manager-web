@@ -5,8 +5,8 @@ import { AxiosError, AxiosResponse } from 'axios'
 import { toast } from 'react-toastify'
 
 import { useLoading } from './loading'
-import { Service } from '@/service'
-import { soAPI } from '@/service/api'
+import { Servico } from '@/servico'
+import { soAPI } from '@/servico/api'
 import { ErrorResponse } from '@/types/error-response'
 
 interface Params {
@@ -35,7 +35,7 @@ export const useMutate = <T extends object, P extends object = object>({
 	endpoint,
 	invalidateQueries = [],
 }: Params) => {
-	const service = new Service<T>(soAPI, endpoint)
+	const service = new Servico<T>(soAPI, endpoint)
 	const queryClient = useQueryClient()
 	const { startLoading, stopLoading } = useLoading()
 
@@ -60,7 +60,7 @@ export const useMutate = <T extends object, P extends object = object>({
 
 	const createMutationFn: MutationFunction<AxiosResponse<T>, MethodParams<P>> = async ({ body }) => {
 		startLoading()
-		const result = await service.create(body)
+		const result = await service.criar(body)
 		stopLoading()
 
 		return result
@@ -88,7 +88,7 @@ export const useMutate = <T extends object, P extends object = object>({
 
 	const updateMutationFn: MutationFunction<AxiosResponse<T>, UpdateMethodParams<P>> = async ({ body, id }) => {
 		startLoading()
-		const result = await service.update(id, body)
+		const result = await service.atualizar(id, body)
 		stopLoading()
 
 		return result
@@ -102,7 +102,7 @@ export const useMutate = <T extends object, P extends object = object>({
 
 	const removeMutationFn: MutationFunction<void, DeleteMethodParams> = async ({ id }) => {
 		startLoading()
-		await service.delete(id)
+		await service.apagar(id)
 		stopLoading()
 	}
 

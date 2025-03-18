@@ -7,8 +7,8 @@ import { useFiltering } from '../filter/filtering'
 import { usePagination } from '../pagination'
 import { useSorting } from '../sorting'
 import { ReturnType } from '@/schemas/pageable'
-import { Service } from '@/service'
-import { soAPI } from '@/service/api'
+import { Servico } from '@/servico'
+import { soAPI } from '@/servico/api'
 
 export interface GetParams {
 	endpoint: string
@@ -19,7 +19,7 @@ export interface GetParams {
 }
 
 export const useGetAll = <T extends ReturnType>({ endpoint, requestParams, enabled }: GetParams) => {
-	const service = new Service<T>(soAPI, endpoint)
+	const service = new Servico<T>(soAPI, endpoint)
 
 	const queryFn = useCallback(async () => {
 		const data = await service.get({

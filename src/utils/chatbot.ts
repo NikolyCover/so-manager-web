@@ -3,6 +3,7 @@ import { formatarDate } from './format-date'
 import { Cliente } from '@/schemas/cliente'
 import { Funcionario } from '@/schemas/funcionario'
 import { OrdemDeServico } from '@/schemas/os'
+import { TipoServico } from '@/schemas/servico'
 
 export function formatarPessoaFisica(pessoaFisica: Cliente | Funcionario, tipo: string): string {
 	const endereco = pessoaFisica.endereco
@@ -70,4 +71,15 @@ export function formatarListaOrdensDeServico(ordens: OrdemDeServico[]) {
 				`📌 Ordem de Serviço ${ordem.numero}\n   📅 Emitida em: ${formatarDate(ordem.dataEmissao)}\n   👤 Cliente: ${ordem.cliente.nome} ${ordem.cliente.ultimoNome} (Código: ${ordem.cliente.id})\n   🛠️ Responsável: ${ordem.funcionarioResponsavel.nome} ${ordem.funcionarioResponsavel.ultimoNome} (Código: ${ordem.funcionarioResponsavel.id})`
 		)
 		.join('\n\n')
+}
+
+export function formatarTipoServico(tipoServico: TipoServico): string {
+	return `🔹 Tipo de Serviço ${tipoServico.id}\n   🏷️ Nome: ${tipoServico.nome}\n   💰 Valor de Referência: R$${tipoServico.valorReferencia.toFixed(2)}`
+}
+
+export function formatarListaTiposServico(tiposServico: TipoServico[]): string {
+	if (tiposServico.length === 0) return '🚫 Não há tipos de serviço cadastrados.'
+
+	// eslint-disable-next-line unicorn/no-array-callback-reference
+	return tiposServico.map(formatarTipoServico).join('\n\n')
 }
